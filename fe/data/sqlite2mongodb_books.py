@@ -3,6 +3,7 @@ import sqlite3 as sqlite
 import os
 
 
+
 class sqlite2mongodb:
     def __init__(self, mongo_url: str="mongodb://localhost:27017/", ) -> None:
         """默认的mongodb服务器路径为mongodb://localhost:27017/，可以修改。"""
