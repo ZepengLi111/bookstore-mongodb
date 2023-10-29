@@ -37,7 +37,7 @@ class sqlite2mongodb:
         cols = ['title', 'author', 'tags', 'author_intro', 'book_intro', 'content']
         col_idx = [names.index(col) for col in cols]
         names.append('_t')
-        stopwords = ['―','“','”','。','    ','.','\'','，','\n',']','[', '·', ' ', '(', ')', '（', '）']
+        stopwords = ['―','“','”','。','    ','.','\'','，','\n',']','[', '·','(', ')', '（', '）', '；', '...', '......']
         """============gyf==============="""
 
         for row in cursor:
@@ -47,10 +47,10 @@ class sqlite2mongodb:
             _t_insert = []
             for idx in col_idx:
                 text = row[idx]
-                text_cutted = jieba.cut(text)  # jieba 
-                words = [word for word in text_cutted if word not in stopwords]
-                print(words)
-                _t_insert.extend(words)
+                if text != None:
+                    text_cutted = jieba.cut(text)  # jieba 
+                    words = [word for word in text_cutted if word not in stopwords]
+                    _t_insert.extend(words)
             row.append(' '.join(_t_insert))
             """============gyf==============="""
 
