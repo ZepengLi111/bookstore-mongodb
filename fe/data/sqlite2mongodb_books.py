@@ -1,6 +1,7 @@
 import pymongo
 import sqlite3 as sqlite
 import os
+import jieba
 
 
 
@@ -31,8 +32,28 @@ class sqlite2mongodb:
         info_col = book_db["book_s_info"]
         # 获取所有的字段名
         names = [x[0] for x in cursor.description]
+
+        """=======将标题，内容等分词并存入 _t 条目下============="""
+        cols = ['title', 'author', 'tags', 'author_intro', 'book_intro', 'content']
+        col_idx = [names.index(col) for col in cols]
+        names.append('_t')
+        stopwords = ['―','“','”','。','    ','.','\'','，','\n',']','[', '·', ' ', '(', ')', '（', '）']
+        """============gyf==============="""
+
         for row in cursor:
             row = list(row)
+
+            """============gyf==============="""
+            _t_insert = []
+            for idx in col_idx:
+                text = row[idx]
+                text_cutted = jieba.cut(text)  # jieba 
+                words = [word for word in text_cutted if word not in stopwords]
+                print(words)
+                _t_insert.extend(words)
+            row.append(' '.join(_t_insert))
+            """============gyf==============="""
+
             # 对tags进行处理。原来的形式："标签1\n标签2\n标签3\n"，处理后：[标签1，标签2，标签3]
             row[15] = [tag for tag in row[15].split("\n") if tag != '']
             # 构造书籍json
@@ -50,7 +71,7 @@ class sqlite2mongodb:
 
 
 
-        
+
 if __name__ == "__main__":
     # 先将mongodb启动起来，再执行下面的语句
     # 执行前确保 book.db 或者 book_lx.db 在 data 目录下
