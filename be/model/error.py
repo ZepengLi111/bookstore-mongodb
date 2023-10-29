@@ -10,8 +10,8 @@ error_code = {
     518: "invalid order id {}",
     519: "not sufficient funds, order id {}",
     520: "mongodb error: {}",
-    521: "",
-    522: "",
+    521: "{} Insufficient account balance",
+    522: "invalid parameter {}",
     523: "",
     524: "",
     525: "",
@@ -19,6 +19,14 @@ error_code = {
     527: "",
     528: "",
 }
+
+
+def error_invalid_parameter(a):
+    return 522, error_code[521].format(a)
+
+
+def error_account_balance(user_id):
+    return 521, error_code[521].format(user_id)
 
 
 def error_non_exist_user_id(user_id):
@@ -60,8 +68,10 @@ def error_not_sufficient_funds(order_id):
 def error_authorization_fail():
     return 401, error_code[401]
 
+
 def database_error(e):
     return 520, error_code[520].format(e)
+
 
 def error_and_message(code, message):
     return code, message

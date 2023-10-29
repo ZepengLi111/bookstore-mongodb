@@ -14,8 +14,8 @@ class DBConn:
             return True
 
     def book_id_exist(self, store_id, book_id):
-        store_col = self.conn['store']
-        result = store_col.find_one({'store_id': store_id, 'books.book_id':book_id})
+        book_col = self.conn['book']
+        result = book_col.find_one({'belong_store_id': store_id, 'book_id':book_id})
         if result is None:
             return False
         else:

@@ -1,39 +1,36 @@
 import logging
-import os
+from pymongo import MongoClient
+from pymongo import errors
 import pymongo
 
 
 class Store:
     database: str
 
-    def __init__(self, db_path):
-        self.database = "mongodb://localhost:27017/"
-        self.init_tables()
-
-    def init_tables(self):
-        try:
-            conn = self.get_db_conn()
-            # MongoDB 设置主键
-            for colid in ['user_id', 'order_id', 'store_id', 'book_id']:
-                col = colid[:-3]
-                _test_str = f'_{colid}' 
-                conn[col].insert_one({colid: _test_str})
-                conn[col].create_index([(colid, 1)], unique=True)
-
-        except pymongo.errors.ConnectionFailure as e:
-            logging.error(e)
-            conn.rollback()
+    def __init__(self, db_url):
+        self.client = MongoClient('mongodb://{}:27017/'.format(db_url))
 
     def get_db_conn(self):  # 返回MongoDB连接
-        return pymongo.MongoClient(self.database)['bookstore']
-
+        # 选择数据库
+        self.mydb = self.client["be"]
+        try:
+            # 单键索引
+            self.mydb['user'].create_index("user_id")
+            self.mydb['order'].create_index("order_id")
+            self.mydb['store'].create_index("store_id")
+            # 复合索引， book_id 正序， belong_store_id 倒序
+            self.mydb['book'].create_index([("book_id", pymongo.ASCENDING), ("belong_store_id", pymongo.DESCENDING)])
+            print('---------->索引命中！')
+        except Exception as e:
+            print('---------->已存在索引！')
+        return self.mydb
 
 database_instance: Store = None
 
 
-def init_database(db_path):
+def init_database(db_url):
     global database_instance
-    database_instance = Store(db_path)
+    database_instance = Store(db_url)
 
 
 def get_db_conn():
