@@ -20,6 +20,7 @@ class Store:
             self.mydb['store'].create_index("store_id")
             # 复合索引， book_id 正序， belong_store_id 倒序
             self.mydb['book'].create_index([("book_id", pymongo.ASCENDING), ("belong_store_id", pymongo.DESCENDING)])
+            self.mydb['book'].create_index({"_t": "text"})
             print('---------->索引命中！')
         except Exception as e:
             print('---------->已存在索引！')
