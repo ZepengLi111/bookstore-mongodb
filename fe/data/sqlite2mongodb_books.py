@@ -1,8 +1,8 @@
 import pymongo
 import sqlite3 as sqlite
 import os
-import jieba
-
+from utils import cut_word
+import base64
 
 
 class sqlite2mongodb:
@@ -28,8 +28,8 @@ class sqlite2mongodb:
     
     def store(self, cursor):
         """将获取的数据数据存入mongodb"""
-        book_db = self.client["book"]
-        info_col = book_db["book_s_info"]
+        book_db = self.client["be"]
+        info_col = book_db["book"]
         # 获取所有的字段名
         names = [x[0] for x in cursor.description]
 
@@ -37,7 +37,7 @@ class sqlite2mongodb:
         cols = ['title', 'author', 'tags', 'author_intro', 'book_intro', 'content']
         col_idx = [names.index(col) for col in cols]
         names.append('_t')
-        stopwords = ['―','“','”','。','    ','.','\'','，','\n',']','[', '·','(', ')', '（', '）', '；', '...', '......']
+        # stopwords = ['―','“','”','。','    ','.','\'','，','\n',']','[', '·','(', ')', '（', '）', '；', '...', '......']
         """============gyf==============="""
 
         for row in cursor:
@@ -48,18 +48,20 @@ class sqlite2mongodb:
             for idx in col_idx:
                 text = row[idx]
                 if text != None:
-                    text_cutted = jieba.cut(text)  # jieba 
-                    words = [word for word in text_cutted if word not in stopwords]
-                    _t_insert.extend(words)
+                #     text_cutted = jieba.cut(text)  # jieba 
+                #     words = [word for word in text_cutted if word not in stopwords]
+                    _t_insert.extend(cut_word(text))
             row.append(' '.join(_t_insert))
             """============gyf==============="""
 
             # 对tags进行处理。原来的形式："标签1\n标签2\n标签3\n"，处理后：[标签1，标签2，标签3]
             row[15] = [tag for tag in row[15].split("\n") if tag != '']
+            row[16] = base64.b64encode(row[16]).decode("utf-8")
             # 构造书籍json
             book = {names[i]: row[i] for i in range(len(names))}
             # 存入mongodb
             info_col.insert_one(book)
+        info_col.create_index([('_t','text')])
     
     def run(self, store_large=False):
         if store_large:
