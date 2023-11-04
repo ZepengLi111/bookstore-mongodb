@@ -163,9 +163,9 @@ class Buyer(db_conn.DBConn):
 
     def receive(self, user_id:str, order_id:str, token: str) -> int:
         try:
-            # code, message = self.User.check_token(user_id, token)
-            # if code != 200:
-            #     return code, message
+            code, message = self.User.check_token(user_id, token)
+            if code != 200:
+                return code, message
             
             if not self.user_id_exist(user_id):
                 return error.error_non_exist_user_id(user_id)
