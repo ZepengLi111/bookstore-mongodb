@@ -8,6 +8,8 @@ from be.model import user
 from pymongo import errors
 import time
 import datetime
+from fe.data.utils import cut_word
+from flask import jsonify
 
 
 class Buyer(db_conn.DBConn):
@@ -24,7 +26,7 @@ class Buyer(db_conn.DBConn):
         try:
             code, message = self.User.check_token(user_id, token)
             if code != 200:
-                return code, message
+                return code, message, order_id
             if not self.user_id_exist(user_id):
                 return error.error_non_exist_user_id(user_id) + (order_id,)
             if not self.store_id_exist(store_id):
@@ -158,7 +160,7 @@ class Buyer(db_conn.DBConn):
             return 530, "{}".format(str(e))
 
         return 200, "ok"
-    
+
     def receive(self, user_id:str, order_id:str, token: str) -> int:
         try:
             # code, message = self.User.check_token(user_id, token)
@@ -183,3 +185,31 @@ class Buyer(db_conn.DBConn):
             return 530, "{}".format(str(e))
 
         return 200, "ok"
+    def search_global(self, keyword, page) -> (int, str, list):
+        try:
+            keywords = ''.join(cut_word(keyword))
+            results = self.book.find({'$text':{'$search': keywords}}, {'_id':0, '_t':0})
+            if page > 0:
+                results = list(results.skip((page-1)*self.page_size).limit(self.page_size))
+            elif page == 0:
+                results = list(results)
+            else:
+                return error.error_invalid_parameter(page)
+            return 200,'ok', results
+        except Exception as e:
+            return 401, "{}".format(str(e)), []
+    
+    def search_in_store(self, keyword, page, store_id) -> (int, str, list):
+        try:
+            keywords = ''.join(cut_word(keyword))
+            results = self.book.find({'$text':{'$search': keywords}, 'belong_store_id':store_id}, {'_id':0, '_t':0})
+            if page > 0:
+                results = list(results.skip((page-1)*self.page_size).limit(self.page_size))
+            elif page == 0:
+                results = list(results)
+            else:
+                return error.error_invalid_parameter(page)
+            results = list(results)
+            return 200,'ok', results
+        except Exception as e:
+            return 401, "{}".format(str(e)), []

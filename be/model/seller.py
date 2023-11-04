@@ -4,6 +4,7 @@ from be.model import error
 from be.model import db_conn
 from be.model import user
 from pymongo import errors
+from fe.data.utils import gen__t
 
 
 class Seller(db_conn.DBConn):
@@ -42,6 +43,7 @@ class Seller(db_conn.DBConn):
             book_dict['book_id'] = book_id
             book_dict['belong_store_id'] = store_id
             book_dict['stock_level'] = stock_level
+            book_dict['_t'] = gen__t(book_dict)
             self.book.insert_one(book_dict)
         except errors.PyMongoError as e:
             return 528, "{}".format(str(e))
