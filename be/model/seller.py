@@ -87,22 +87,27 @@ class Seller(db_conn.DBConn):
             return 530, "{}".format(str(e))
         return 200, "Successfully created the store"
     
-    def send(self, user_id:str, order_id:str, token: str) -> int:
+    def send(self, user_id:str, order_id:str, store_id: str, token: str) -> int:
         try:
             code, message = self.User.check_token(user_id, token)
             if code != 200:
                 return code, message
             if not self.user_id_exist(user_id):
                 return error.error_non_exist_user_id(user_id)
-            result = self.order.find_one({"order_id": order_id})
-            if result is None:
+            result_store = self.store.find_one({"store_id": store_id})
+            if result_store is None:
+                return error.error_non_exist_store_id(store_id)
+            elif result_store['seller_id'] != user_id:
+                return error.error_store_ownership(user_id)
+            result_order = self.order.find_one({"order_id": order_id})
+            if result_order is None:
                 return error.error_non_exist_order_id(order_id)
-            elif result['state'] != 1:
-                return error.error_order_state(result['state'])
+            elif result_order['state'] != 1:
+                return error.error_order_state(result_order['state'])
             else:
-                result2 = self.order.update_one({"order_id": order_id, "seller_id": user_id}, {"$set": {"state": 2}})
-                if result2.modified_count == 0:
-                    return error.error_authorization_fail()
+                result = self.order.update_one({"order_id": order_id, "seller_store_id": store_id}, {"$set": {"state": 2}})
+                return 200, "ok"
+            
 
         except errors.PyMongoError as e:
             return 528, "{}".format(str(e))

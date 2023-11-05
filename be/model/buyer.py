@@ -62,7 +62,7 @@ class Buyer(db_conn.DBConn):
                 # order_detail_data = {'order_id':uid, 'seller_id':user_id,'book_id':book_id, 'count':count, 'price':price}
                 # result_2 = self.order.insert_one(order_detail_data)
             creat_time = time.time()
-            new_order_data = {'order_id':uid, 'buyer_id':user_id, 'creat_time':creat_time, 'payment_deadline':creat_time+1800,'state':'未付款','order_amount':order_amount, 'seller_store_id':store_id, 'purchased_book_id':book_id_list, 'purchase_quantity':book_count_list}
+            new_order_data = {'order_id':uid, 'buyer_id':user_id, 'creat_time':creat_time, 'payment_deadline':creat_time+1800,'state':0,'order_amount':order_amount, 'seller_store_id':store_id, 'purchased_book_id':book_id_list, 'purchase_quantity':book_count_list}
             result_3 = self.order.insert_one(new_order_data)
             order_id = uid
         except sqlite.Error as e:
@@ -130,7 +130,7 @@ class Buyer(db_conn.DBConn):
             # if result_5.modified_count == 0:
             #     return error.error_non_exist_user_id(buyer_id)
 
-            result_6 = self.order.update_one({'order_id': order_id},{'$set': {'state': "已付款"}})
+            result_6 = self.order.update_one({'order_id': order_id},{'$set': {'state': 1}})
             print('result_6----->',result_6)
 
             if result_6.modified_count == 0:
@@ -166,18 +166,17 @@ class Buyer(db_conn.DBConn):
             code, message = self.User.check_token(user_id, token)
             if code != 200:
                 return code, message
-            
             if not self.user_id_exist(user_id):
                 return error.error_non_exist_user_id(user_id)
-            result = self.order.find_one({"order_id": order_id})
-            if result is None:
+            
+            result_order = self.order.find_one({"order_id": order_id})
+            if result_order is None:
                 return error.error_non_exist_order_id(order_id)
-            elif result['state'] != 2:
-                return error.error_order_state(result['state'])
+            elif result_order['state'] != 2:
+                return error.error_order_state(result_order['state'])
             else:
-                result2 = self.order.update_one({"order_id": order_id, "buyer_id": user_id}, {"$set": {"state": 3}})
-                if result2.modified_count == 0:
-                    return error.error_authorization_fail()
+                result = self.order.update_one({"order_id": order_id, "buyer_id": user_id}, {"$set": {"state": 3}})
+                
 
         except errors.PyMongoError as e:
             return 528, "{}".format(str(e))
@@ -185,6 +184,7 @@ class Buyer(db_conn.DBConn):
             return 530, "{}".format(str(e))
 
         return 200, "ok"
+    
     def search_global(self, keyword, page) -> (int, str, list):
         try:
             keywords = ''.join(cut_word(keyword))
