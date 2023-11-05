@@ -2,7 +2,7 @@ simplejson~=3.19.2
 lxml~=4.9.3
 codecov
 coverage
-flask~=3.0.0
+flask~=2.0.0
 pre - commit
 pytest~=7.4.3
 PyJWT~=2.8.0
