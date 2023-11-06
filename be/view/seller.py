@@ -51,8 +51,9 @@ def send():
     user_id: str = request.json.get("user_id")
     order_id: str = request.json.get("order_id")
     token: str = request.headers.get("token")
+    store_id: str = request.json.get("store_id")
 
     s = seller.Seller()
-    code, message = s.send(user_id, order_id, token)
+    code, message = s.send(user_id, order_id, store_id, token)
 
     return jsonify({"message": message}), code

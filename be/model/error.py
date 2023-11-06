@@ -13,12 +13,16 @@ error_code = {
     521: "{} Insufficient account balance",
     522: "invalid parameter {}",
     523: "order state error, order status {}",   # 订单状态错误，发货时要求订单处于已付款(状态号为1)状态，其他状态均会触发该错误
-    524: "",
+    524: "store not belongs the seller {}",
     525: "",
     526: "",
     527: "",
     528: "",
 }
+
+
+def error_store_ownership(seller_id):
+    return 524, error_code[524].format(seller_id)
 
 def error_order_state(state):
     return 523, error_code[523].format(state)
