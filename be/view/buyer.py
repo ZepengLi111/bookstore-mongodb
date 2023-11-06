@@ -62,7 +62,7 @@ def search_global():
     res_dict = json.dumps(results, ensure_ascii=False)
     return jsonify({"message": message, "results": res_dict}), code
 
-@bp_buyer.route("/search_in_stroe", methods=["POST"])
+@bp_buyer.route("/search_in_store", methods=["POST"])
 def search_in_store():
     keyword: str = request.json.get("keyword")
     page: int = request.json.get("page")
