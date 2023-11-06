@@ -9,7 +9,7 @@ from pymongo import errors
 import time
 import datetime
 from fe.data.utils import cut_word
-from flask import jsonify
+
 
 
 class Buyer(db_conn.DBConn):
@@ -187,29 +187,31 @@ class Buyer(db_conn.DBConn):
         return 200, "ok"
     def search_global(self, keyword, page) -> (int, str, list):
         try:
-            keywords = ''.join(cut_word(keyword))
+            keywords = ' '.join(cut_word(keyword))
             results = self.book.find({'$text':{'$search': keywords}}, {'_id':0, '_t':0})
             if page > 0:
                 results = list(results.skip((page-1)*self.page_size).limit(self.page_size))
             elif page == 0:
                 results = list(results)
             else:
-                return error.error_invalid_parameter(page)
+                return error.error_invalid_parameter(page) + ([],)
             return 200,'ok', results
         except Exception as e:
-            return 401, "{}".format(str(e)), []
+            return 401, "{}".format(str(e)) + ([],)
     
     def search_in_store(self, keyword, page, store_id) -> (int, str, list):
         try:
-            keywords = ''.join(cut_word(keyword))
+            if not self.store_id_exist(store_id):
+                return error.error_non_exist_store_id(store_id) + ([],)
+            keywords = ' '.join(cut_word(keyword))
             results = self.book.find({'$text':{'$search': keywords}, 'belong_store_id':store_id}, {'_id':0, '_t':0})
             if page > 0:
                 results = list(results.skip((page-1)*self.page_size).limit(self.page_size))
             elif page == 0:
                 results = list(results)
             else:
-                return error.error_invalid_parameter(page)
+                return error.error_invalid_parameter(page) + ([],)
             results = list(results)
             return 200,'ok', results
         except Exception as e:
-            return 401, "{}".format(str(e)), []
+            return 401, "{}".format(str(e)) + ([],)
