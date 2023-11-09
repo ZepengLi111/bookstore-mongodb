@@ -47,7 +47,8 @@ class Buyer:
         url = urljoin(self.url_prefix, "add_funds")
         headers = {"token": self.token}
         r = requests.post(url, headers=headers, json=json)
-    
+        return r.status_code
+
     def receive(self, order_id: str) -> int:
         json = {
             "user_id": self.user_id,
@@ -58,22 +59,15 @@ class Buyer:
         r = requests.post(url, headers=headers, json=json)
         return r.status_code
 
-    def search_global(self, keyword: str, page: int=None) -> int:
-        json = {
-            "keyword" : keyword,
-            "page" : page
-        }
+    def search_global(self, keyword: str, page: int = None) -> int:
+        json = {"keyword": keyword, "page": page}
         url = urljoin(self.url_prefix, "search_global")
         headers = {"token": self.token}
         r = requests.post(url, headers=headers, json=json)
         return r.status_code
-    
-    def search_in_store(self, keyword: str, store_id:str, page: int=None) -> int:
-        json = {
-            "keyword" : keyword,
-            "page" : page,
-            "store_id" : store_id
-        }
+
+    def search_in_store(self, keyword: str, store_id: str, page: int = None) -> int:
+        json = {"keyword": keyword, "page": page, "store_id": store_id}
         url = urljoin(self.url_prefix, "search_in_store")
         headers = {"token": self.token}
         r = requests.post(url, headers=headers, json=json)
