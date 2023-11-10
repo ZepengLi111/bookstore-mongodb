@@ -19,6 +19,7 @@ def new_order():
         count = book.get("count")
         id_and_count.append((book_id, count))
     b = Buyer()
+    b.delete_order_time()
     code, message, order_id = b.new_order(user_id, store_id, id_and_count, token)
     return jsonify({"message": message, "order_id": order_id}), code
 
@@ -29,6 +30,7 @@ def payment():
     order_id: str = request.json.get("order_id")
     password: str = request.json.get("password")
     b = Buyer()
+    b.delete_order_time()
     code, message = b.payment(user_id, password, order_id)
     return jsonify({"message": message}), code
 
@@ -39,8 +41,10 @@ def add_funds():
     password = request.json.get("password")
     add_value = request.json.get("add_value")
     b = Buyer()
+    b.delete_order_time()
     code, message = b.add_funds(user_id, password, add_value)
     return jsonify({"message": message}), code
+
 
 @bp_buyer.route("/receive", methods=["POST"])
 def send():
@@ -48,8 +52,10 @@ def send():
     order_id: str = request.json.get("order_id")
     token: str = request.headers.get("token")
     s = Buyer()
+    b.delete_order_time()
     code, message = s.receive(user_id, order_id, token)
     return jsonify({"message": message}), code
+
 
 @bp_buyer.route("/search_global", methods=["POST"])
 def search_global():
@@ -58,9 +64,11 @@ def search_global():
     if page == None:
         page = 0
     b = Buyer()
+    b.delete_order_time()
     code, message, results = b.search_global(keyword, page)
     res_dict = json.dumps(results, ensure_ascii=False)
     return jsonify({"message": message, "results": res_dict}), code
+
 
 @bp_buyer.route("/search_in_store", methods=["POST"])
 def search_in_store():
@@ -70,6 +78,113 @@ def search_in_store():
     if page == None:
         page = 0
     b = Buyer()
+    b.delete_order_time()
     code, message, results = b.search_in_store(keyword, page, store_id)
     res_dict = json.dumps(results, ensure_ascii=False)
     return jsonify({"message": message, "results": res_dict}), code
+
+
+'''
+@ search_all_order()
+查询所有订单，根据user_id在order表中查询
+
+order表的属性：
+'order_id'：订单id 
+'buyer_id'：用户购买id 
+'creat_time'： 订单创建时间 
+'payment_deadline'：支付截止时间
+'state'：订单状态信息 
+'order_amount'：购买书本总量
+'seller_store_id'：商家id
+'purchased_book_id'：购买书本id[]
+'purchase_quantity'：购买数量[]
+
+search_state:
+0 查询所有订单
+1 查询待付款订单
+2 查询已付款待发货订单
+3 查询已发货待收货订单
+4 查询已取消订单
+'''
+
+
+@bp_buyer.route("/search_order", methods=["POST"])
+def search_all_order():
+    user_id: str = request.json.get("user_id")
+    token: str = request.headers.get("token")
+    b = Buyer()
+    b.delete_order_time()
+    code, message, results = b.search_order(user_id, token, 0)
+    results = [str(result) for result in results]
+    res_dict = json.dumps(results, ensure_ascii=False)
+    return jsonify({"message": message, "results": res_dict}), code
+
+
+@bp_buyer.route("/search_unpaid_order", methods=["POST"])
+def search_unpaid_order():
+    user_id: str = request.json.get("user_id")
+    token: str = request.headers.get("token")
+    b = Buyer()
+    b.delete_order_time()
+    code, message, results = b.search_order(user_id, token, 1)
+    results = [str(result) for result in results]
+    res_dict = json.dumps(results, ensure_ascii=False)
+    return jsonify({"message": message, "results": res_dict}), code
+
+
+@bp_buyer.route("/search_undelivered_order", methods=["POST"])
+def search_undelivered_order():
+    user_id: str = request.json.get("user_id")
+    token: str = request.headers.get("token")
+    b = Buyer()
+    b.delete_order_time()
+    code, message, results = b.search_order(user_id, token, 2)
+    results = [str(result) for result in results]
+    res_dict = json.dumps(results, ensure_ascii=False)
+    return jsonify({"message": message, "results": res_dict}), code
+
+
+@bp_buyer.route("/search_unreceive_order", methods=["POST"])
+def search_unreceive_order():
+    user_id: str = request.json.get("user_id")
+    token: str = request.headers.get("token")
+    b = Buyer()
+    b.delete_order_time()
+    code, message, results = b.search_order(user_id, token, 3)
+    results = [str(result) for result in results]
+    res_dict = json.dumps(results, ensure_ascii=False)
+    return jsonify({"message": message, "results": res_dict}), code
+
+
+@bp_buyer.route("/search_ok_order", methods=["POST"])
+def search_ok_order():
+    user_id: str = request.json.get("user_id")
+    token: str = request.headers.get("token")
+    b = Buyer()
+    b.delete_order_time()
+    code, message, results = b.search_order(user_id, token, 4)
+    results = [str(result) for result in results]
+    res_dict = json.dumps(results, ensure_ascii=False)
+    return jsonify({"message": message, "results": res_dict}), code
+
+
+@bp_buyer.route("/search_canceled_order", methods=["POST"])
+def search_canceled_order():
+    user_id: str = request.json.get("user_id")
+    token: str = request.headers.get("token")
+    b = Buyer()
+    b.delete_order_time()
+    code, message, results = b.search_order(user_id, token, 5)
+    results = [str(result) for result in results]
+    res_dict = json.dumps(results, ensure_ascii=False)
+    return jsonify({"message": message, "results": res_dict}), code
+
+
+@bp_buyer.route("/delete_order", methods=["POST"])
+def delete_order():
+    user_id: str = request.json.get("user_id")
+    order_id: str = request.json.get("order_id")
+    token: str = request.headers.get("token")
+    b = Buyer()
+    code, message = b.delete_order(user_id, order_id, token)
+    return jsonify({"message": message}), code

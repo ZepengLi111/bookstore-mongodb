@@ -2,12 +2,14 @@ import sqlite3 as sqlite
 import uuid
 import json
 import logging
+from typing import Tuple, List, Any, Mapping
+
 from be.model import db_conn
 from be.model import error
 from be.model import user
 from pymongo import errors
 import time
-import datetime
+from datetime import datetime
 from fe.data.utils import cut_word
 
 
@@ -54,7 +56,10 @@ class Buyer(db_conn.DBConn):
                 if stock_level < count:
                     return error.error_stock_level_low(book_id) + (order_id,)
 
-                result_1 = self.book.update_one({'belong_store_id':store_id, 'book_id':book_id, 'stock_level':{'$gte':count}}, {'$inc': {'stock_level': (0-count)}})
+                result_1 = self.book.update_one({'belong_store_id':store_id,
+                                                 'book_id':book_id,
+                                                 'stock_level':{'$gte':count}},
+                                                {'$inc': {'stock_level': (0-count)}})
 
                 book_id_list.append(book_id)
                 book_count_list.append(count)
@@ -62,7 +67,15 @@ class Buyer(db_conn.DBConn):
                 # order_detail_data = {'order_id':uid, 'seller_id':user_id,'book_id':book_id, 'count':count, 'price':price}
                 # result_2 = self.order.insert_one(order_detail_data)
             creat_time = time.time()
-            new_order_data = {'order_id':uid, 'buyer_id':user_id, 'creat_time':creat_time, 'payment_deadline':creat_time+1800,'state':0,'order_amount':order_amount, 'seller_store_id':store_id, 'purchased_book_id':book_id_list, 'purchase_quantity':book_count_list}
+            new_order_data = {'order_id': uid,
+                              'buyer_id': user_id,
+                              'creat_time': creat_time,
+                              'payment_deadline': creat_time+1800,
+                              'state': 0,
+                              'order_amount': order_amount,
+                              'seller_store_id': store_id,
+                              'purchased_book_id': book_id_list,
+                              'purchase_quantity': book_count_list}
             result_3 = self.order.insert_one(new_order_data)
             order_id = uid
         except sqlite.Error as e:
@@ -122,14 +135,6 @@ class Buyer(db_conn.DBConn):
             if result_4.modified_count == 0:
                 return error.error_not_sufficient_funds(order_id)
 
-            # 付款成功后不需要再把花掉的钱加回去
-            # result_5 = self.user.update_one({'user_id': buyer_id}, {'$inc': {'balance': total_price}})
-            # print('result_5----->',result_5)
-            #
-            #
-            # if result_5.modified_count == 0:
-            #     return error.error_non_exist_user_id(buyer_id)
-
             result_6 = self.order.update_one({'order_id': order_id},{'$set': {'state': 1}})
             print('result_6----->',result_6)
 
@@ -161,7 +166,7 @@ class Buyer(db_conn.DBConn):
 
         return 200, "ok"
 
-    def receive(self, user_id:str, order_id:str, token: str) -> int:
+    def receive(self, user_id:str, order_id:str, token: str) -> (int, str):
         try:
             code, message = self.User.check_token(user_id, token)
             if code != 200:
@@ -176,7 +181,6 @@ class Buyer(db_conn.DBConn):
                 return error.error_order_state(result_order['state'])
             else:
                 result = self.order.update_one({"order_id": order_id, "buyer_id": user_id}, {"$set": {"state": 3}})
-                
 
         except errors.PyMongoError as e:
             return 528, "{}".format(str(e))
@@ -215,3 +219,83 @@ class Buyer(db_conn.DBConn):
             return 200,'ok', results
         except Exception as e:
             return 401, "{}".format(str(e)) + ([],)
+
+    def search_order(self, user_id: str, token: str, search_state: int) -> (int, str, list):
+        try:
+            code, message = self.User.check_token(user_id, token)
+            if code != 200:
+                return code, message
+            if not self.user_id_exist(user_id):
+                return error.error_non_exist_user_id(user_id) + ([],)
+            if search_state == 0: # 查询所有订单
+                results = self.order.find({'buyer_id': user_id})
+                results = list(results)
+                return 200, 'ok', results
+            elif search_state == 1: # 查询待支付订单
+                results = self.order.find({'buyer_id': user_id, 'state': 0})
+                results = list(results)
+                return 200, 'ok', results
+            elif search_state == 2: # 查询已支付未发货
+                results = self.order.find({'buyer_id': user_id, 'state': 1})
+                results = list(results)
+                return 200, 'ok', results
+            elif search_state == 3: # 查询已发货未收货
+                results = self.order.find({'buyer_id': user_id, 'state': 3})
+                results = list(results)
+                return 200, 'ok', results
+            elif search_state == 4: # 查询已收货
+                results = self.order.find({'buyer_id': user_id, 'state': 4})
+                results = list(results)
+                return 200, 'ok', results
+            elif search_state == 5: # 查询已取消订单
+                results = self.order.find({'buyer_id': user_id, 'state': 5})
+                results = list(results)
+                return 200, 'ok', results
+        except Exception as e:
+            return 401, "{}".format(str(e)) + ([],)
+
+    def delete_order(self, user_id: str, order_id: str, token: str) -> (int, str):
+        try:
+            code, message = self.User.check_token(user_id, token)
+            if code != 200:
+                return code, message
+            if not self.order_id_exist(user_id, order_id):
+                return error.error_non_exist_user_id(user_id) + ([],)
+            order_col = self.conn['order']
+            result = order_col.find_one({'buyer_id': user_id,
+                                         'order_id': order_id,
+                                         'state': {'$in': [0, 1]}})
+            self.order.update_one({'buyer_id': user_id,
+                                   'order_id': order_id,
+                                   'state': {'$in': [0, 1]}},
+                                  {'$set': {'state': 5}})  # 修改待付款订单或未发货订单状态为删除状态
+            # user_id, balance 更新用户余额
+            self.user.update_one({'user_id': user_id},
+                                 {'$inc': {'balance': result.get("order_amount")}})
+            # purchased_book_id, purchase_quantity, 更新商店库存
+            purchased_book_id = result.get('purchased_book_id')
+            purchase_quantity = result.get('purchase_quantity')
+            store_id = result.get('seller_store_id')
+            for i in range(len(purchase_quantity)):
+                _id = purchased_book_id[i]
+                _q = purchase_quantity[i]
+                self.book.update_one({'belong_store_id': _id, 'seller_store_id': store_id},
+                                     {'$inc': {'stock_level': _q}})
+            return 200, 'ok'
+        except errors.PyMongoError as e:
+            return 528, "{}".format(str(e))
+        except BaseException as e:
+            return 530, "{}".format(str(e))
+
+    def delete_order_time(self):
+        try:
+            order_col = self.conn['order']
+            now = datetime.now()
+            orders = order_col.find({"deadline":  {"$lt":  now}, "state": 0})
+            for order in orders:
+                order_col.delete_one({"order_id": order["order_id"]})
+        except errors.PyMongoError as e:
+            return 528, "{}".format(str(e))
+        except BaseException as e:
+            return 530, "{}".format(str(e))
+        return 200, "ok"
