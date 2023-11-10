@@ -47,7 +47,7 @@ def unregister():
 
 
 @bp_auth.route("/password", methods=["POST"])
-def change_password():
+def password():
     user_id = request.get_json().get("user_id", "")
     old_password = request.get_json().get("oldPassword", "")
     new_password = request.get_json().get("newPassword", "")

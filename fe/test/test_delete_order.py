@@ -1,26 +1,24 @@
-import pytest
-from fe.access.new_buyer import register_new_buyer
 import uuid
-from fe.access.buyer import Buyer
+import pytest
 from fe.test.gen_book_data import GenBook
+from fe.access.new_buyer import register_new_buyer
 from fe.access.book import Book
 
 
 class TestDeleteOrder:
-    buyer: Buyer
-
     @pytest.fixture(autouse=True)
     def pre_run_initialization(self):
-        self.store_id = "test_delete_store_{}".format(str(uuid.uuid1()))
-        self.seller_id = "test_delete_seller_{}".format(str(uuid.uuid1()))
         self.store_id = "test_delete_store_id_{}".format(str(uuid.uuid1()))
-        self.buyer_id = "test_delete_buyer_{}".format(str(uuid.uuid1()))
+        self.seller_id = "test_delete_seller_id_{}".format(str(uuid.uuid1()))
+        self.store_id = "test_delete_store_id_{}".format(str(uuid.uuid1()))
+        self.buyer_id = "test_delete_buyer_id_{}".format(str(uuid.uuid1()))
 
         gen_book = GenBook(self.seller_id, self.store_id)
-        self.seller = gen_book.seller
+        self.seller=gen_book.seller
         ok, buy_book_id_list = gen_book.gen(non_exist_book_id=False, low_stock_level=False, max_book_count=5)
         self.buy_book_info_list = gen_book.buy_book_info_list
         assert ok
+
         self.password = self.buyer_id
         b = register_new_buyer(self.buyer_id, self.password)
         self.buyer = b
@@ -43,7 +41,7 @@ class TestDeleteOrder:
     def test_ok_paid(self):
         code = self.buyer.payment(self.order_id)
         assert code == 200
-        code = self.buyer.delete_order(self.buyer_id, self.order_id)
+        code = self.buyer.delete_order(self.buyer_id,self.order_id)
         assert code == 200
 
     def test_ok_unpay(self):
