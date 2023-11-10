@@ -3,8 +3,8 @@
 /.idea
 /.pytest_cache
 /htmlcov
-/setup.py
+setup.py
 /script
 /venv
-/app.log
-/app.py
+app.log
+app.py

@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8e68059-5a4d-46aa-95e9-788ed10c7c25" name="Changes" comment="" />
+    <list default="true" id="c8e68059-5a4d-46aa-95e9-788ed10c7c25" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/.coverage" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/model/buyer.py" beforeDir="false" afterPath="$PROJECT_DIR$/be/model/buyer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/model/store.py" beforeDir="false" afterPath="$PROJECT_DIR$/be/model/store.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/access/buyer.py" beforeDir="false" afterPath="$PROJECT_DIR$/fe/access/buyer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/result.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +55,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/XuJun/Desktop/数据库实验/新建文件夹/bookstore-mongodb",
+    "last_opened_file_path": "C:/Users/XuJun/Desktop/数据库实验/新建文件夹/last",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -98,6 +106,8 @@
       <workItem from="1699598388158" duration="4033000" />
       <workItem from="1699607899028" duration="8350000" />
       <workItem from="1699616756462" duration="2823000" />
+      <workItem from="1699620891145" duration="385000" />
+      <workItem from="1699621323994" duration="810000" />
     </task>
     <servers />
   </component>

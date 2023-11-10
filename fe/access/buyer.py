@@ -48,11 +48,6 @@ class Buyer:
         headers = {"token": self.token}
         r = requests.post(url, headers=headers, json=json)
         return r.status_code
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 7bfae551cbaacb74dd9003b004cda96f0bfff550
     def receive(self, order_id: str) -> int:
         json = {
             "user_id": self.user_id,
@@ -78,14 +73,11 @@ class Buyer:
         return r.status_code
 
     def search_order(self, buyer_id: str, state) -> int:
-<<<<<<< HEAD
         json = {
             "buyer_id": buyer_id,
             "search_state": state
         }
         url = urljoin(self.url_prefix, "search_order")
-=======
-        json = {"buyer_id": buyer_id}
         if state == 0:
             url = urljoin(self.url_prefix, "search_order")
         elif state == 1:  # 查询待付款订单
@@ -98,7 +90,7 @@ class Buyer:
             url = urljoin(self.url_prefix, "search_ok_order")
         elif state == 5:  # 查询已取消订单
             url = urljoin(self.url_prefix, "search_canceled_order")
->>>>>>> 7bfae551cbaacb74dd9003b004cda96f0bfff550
+
         headers = {"token": self.token}
         r = requests.post(url, headers=headers, json=json)
         return r.status_code

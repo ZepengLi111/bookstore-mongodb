@@ -38,10 +38,7 @@ class Buyer(db_conn.DBConn):
             for book_id, count in id_and_count:
 
                 result = self.book.find_one({'belong_store_id': store_id, 'book_id':book_id})
-<<<<<<< HEAD
-=======
-                # print(result)
->>>>>>> 7bfae551cbaacb74dd9003b004cda96f0bfff550
+
                 if result is None:
                     return error.error_non_exist_book_id(book_id) + (order_id,)
 
