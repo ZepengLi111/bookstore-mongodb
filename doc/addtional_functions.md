@@ -170,3 +170,83 @@ Status Code:
 522 | 无效参数
 513 | 店铺不存在
 
+## 订单状态
+
+### 订单查询
+
+#### URL
+
+查询订单：
+POST http://[address]/buyer/search_order
+
+#### Request
+
+##### Body:
+```json
+{
+  "user_id": "user_id",
+  "search_state": "search_state",
+}
+```
+
+##### 属性说明：
+
+key | 类型 | 描述       | 是否可为空
+---|---|----------|---
+user_id | string | 查询用户历史订单 | N
+search_state | string | 查询状态 | N
+
+search_state有以下几种状态：
+- 0：查询全部订单
+- 1：查询待付款订单
+- 2：查询已付款代发货订单
+- 3：查询已发货待收货订单
+- 4：查询成功结束订单
+- 5：查询已取消订单
+
+
+
+Status Code:
+
+码 | 描述
+--- | ---
+200 | 查询成功
+401 | 查询失败
+522 | 无效参数
+513 | user_id不存在
+
+
+
+## 订单删除
+
+#### URL
+POST http://[address]/buyer/delete_order
+
+
+#### Request
+
+##### Body:
+```json
+{
+  "user_id": "user_id",
+  "order_id": "order_id"
+}
+```
+
+##### 属性说明：
+
+key | 类型 | 描述        | 是否可为空
+---|---|-----------|---
+user_id | string | 用户id      | N
+order_id | string | 想要删除的订单id | N
+
+
+
+Status Code:
+
+码 | 描述
+--- | ---
+200 | 删除成功
+401 | 删除失败
+522 | 无效参数
+513 | user_id不存在
