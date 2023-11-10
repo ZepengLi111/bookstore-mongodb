@@ -70,8 +70,8 @@ class Buyer(db_conn.DBConn):
             self.order.insert_one(new_order_data)
             order_id = uid
         except sqlite.Error as e:
-            logging.info("528, {}".format(str(e)))
-            return 528, "{}".format(str(e)), ""
+            logging.info("520, {}".format(str(e)))
+            return error.database_error(e) + ("",)
         except BaseException as e:
             logging.info("530, {}".format(str(e)))
             return 530, "{}".format(str(e)), ""
@@ -85,10 +85,13 @@ class Buyer(db_conn.DBConn):
                 return error.error_invalid_order_id(order_id)
 
             buyer_id = result['buyer_id']
-            store_id = result['seller_store_id']
+            # store_id = result['seller_store_id']
             total_price = result['order_amount']
 
-            result_1 = self.user.find_one({'user_id': buyer_id}, {'balance': 1, "password": 1})
+            # if buyer_id != user_id:
+            #     return error.error_authorization_fail()
+
+            result_1 = self.user.find_one({'user_id': buyer_id}, {'balance':1, "password":1})
             # print('result_1----->',result_1)
             # if result_1 is None:
             #     return error.error_non_exist_user_id(buyer_id)
@@ -124,7 +127,8 @@ class Buyer(db_conn.DBConn):
             #     return error.error_invalid_order_id(order_id)
 
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
+
         except BaseException as e:
             return 530, "{}".format(str(e))
 
@@ -144,7 +148,7 @@ class Buyer(db_conn.DBConn):
             #     return error.error_non_exist_user_id(user_id)
 
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
         except BaseException as e:
             return 530, "{}".format(str(e))
         return 200, "ok"
@@ -166,7 +170,7 @@ class Buyer(db_conn.DBConn):
                 result = self.order.update_one({"order_id": order_id, "buyer_id": user_id}, {"$set": {"state": 3}})
 
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
         except BaseException as e:
             return 530, "{}".format(str(e))
 

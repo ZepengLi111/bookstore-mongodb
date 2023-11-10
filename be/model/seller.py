@@ -29,9 +29,6 @@ class Seller(db_conn.DBConn):
             code, message = self.User.check_token(user_id, token)
             if code != 200:
                 return code, message
-            if not self.user_id_exist(user_id):
-                # print('----->1')
-                return error.error_non_exist_user_id(user_id)
             if not self.store_id_exist(store_id):
                 # print('----->2')
                 return error.error_non_exist_store_id(store_id)
@@ -46,7 +43,7 @@ class Seller(db_conn.DBConn):
             book_dict['_t'] = gen__t(book_dict)
             self.book.insert_one(book_dict)
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
         except BaseException as e:
             return 530, "{}".format(str(e))
         return 200, "ok"
@@ -58,15 +55,13 @@ class Seller(db_conn.DBConn):
             code, message = self.User.check_token(user_id, token)
             if code != 200:
                 return code, message
-            if not self.user_id_exist(user_id):
-                return error.error_non_exist_user_id(user_id)
             if not self.store_id_exist(store_id):
                 return error.error_non_exist_store_id(store_id)
             if not self.book_id_exist(store_id, book_id):
                 return error.error_non_exist_book_id(book_id)
             self.book.update_one({"belong_store_id": store_id, "book_id": book_id},{'$inc': {'stock_level': add_stock_level}})
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
         except BaseException as e:
             return 530, "{}".format(str(e))
         return 200, "ok"
@@ -76,13 +71,11 @@ class Seller(db_conn.DBConn):
             code, message = self.User.check_token(user_id, token)
             if code != 200:
                 return code, message
-            if not self.user_id_exist(user_id):
-                return error.error_non_exist_user_id(user_id)
             if self.store_id_exist(store_id):
                 return error.error_exist_store_id(store_id)
             self.store.insert_one({"store_id": store_id, "seller_id": user_id})
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
         except BaseException as e:
             return 530, "{}".format(str(e))
         return 200, "Successfully created the store"
@@ -92,8 +85,8 @@ class Seller(db_conn.DBConn):
             code, message = self.User.check_token(user_id, token)
             if code != 200:
                 return code, message
-            if not self.user_id_exist(user_id):
-                return error.error_non_exist_user_id(user_id)
+            # if not self.user_id_exist(user_id):
+            #     return error.error_non_exist_user_id(user_id)
             result_store = self.store.find_one({"store_id": store_id})
             if result_store is None:
                 return error.error_non_exist_store_id(store_id)
@@ -108,9 +101,8 @@ class Seller(db_conn.DBConn):
                 result = self.order.update_one({"order_id": order_id, "seller_store_id": store_id}, {"$set": {"state": 2}})
 
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
         except BaseException as e:
             return 530, "{}".format(str(e))
 
-        return 200, "ok"
 
