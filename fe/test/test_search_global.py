@@ -10,8 +10,8 @@ class TestSearchGlobal:
 
     @pytest.fixture(autouse=True)
     def pre_run_initialization(self):
-        self.seller_id = "test_payment_seller_id_{}".format(str(uuid.uuid1()))
-        self.buyer_id = "test_payment_buyer_id_{}".format(str(uuid.uuid1()))
+        self.seller_id = "test_search_in_store_seller_id_{}".format(str(uuid.uuid1()))
+        self.buyer_id = "test_search_in_store_buyer_id_{}".format(str(uuid.uuid1()))
         self.password = self.seller_id
         b = register_new_buyer(self.buyer_id, self.password)
         self.buyer = b

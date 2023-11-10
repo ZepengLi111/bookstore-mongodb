@@ -1,6 +1,12 @@
 **/__pycache__/
+<<<<<<< HEAD
 /.coverage
 /htmlcov
 setup.py
 /script
 /venv
+=======
+app.log
+.coverage
+app.py
+>>>>>>> 7bfae551cbaacb74dd9003b004cda96f0bfff550

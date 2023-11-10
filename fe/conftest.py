@@ -1,7 +1,7 @@
 import requests
 import threading
 from urllib.parse import urljoin
-from be import server
+from be import serve
 from fe import conf
 
 thread: threading.Thread = None
@@ -10,7 +10,7 @@ thread: threading.Thread = None
 # 修改这里启动后端程序，如果不需要可删除这行代码
 def run_backend():
     # rewrite this if rewrite backend
-    server.be_run()
+    serve.be_run()
 
 
 def pytest_configure(config):

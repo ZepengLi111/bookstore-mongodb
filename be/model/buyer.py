@@ -38,6 +38,10 @@ class Buyer(db_conn.DBConn):
             for book_id, count in id_and_count:
 
                 result = self.book.find_one({'belong_store_id': store_id, 'book_id':book_id})
+<<<<<<< HEAD
+=======
+                # print(result)
+>>>>>>> 7bfae551cbaacb74dd9003b004cda96f0bfff550
                 if result is None:
                     return error.error_non_exist_book_id(book_id) + (order_id,)
 
@@ -114,13 +118,13 @@ class Buyer(db_conn.DBConn):
                 return error.error_account_balance(buyer_id)
 
             result_4 = self.user.update_one({'user_id': buyer_id, 'balance':{'$gte':total_price}}, {'$inc': {'balance': (0-total_price)}})
-            print('result_4----->',result_4)
+            # print('result_4----->',result_4)
 
             if result_4.modified_count == 0:
                 return error.error_not_sufficient_funds(order_id)
 
             result_6 = self.order.update_one({'order_id': order_id},{'$set': {'state': 1}})
-            print('result_6----->',result_6)
+            # print('result_6----->',result_6)
 
             if result_6.modified_count == 0:
                 return error.error_invalid_order_id(order_id)

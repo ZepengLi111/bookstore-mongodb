@@ -11,8 +11,7 @@
 # 二，项目运行
 
 1. 启动MongoDB，并在be数据库下建立book, user, order, store文档集
-2. 确保fe/data下有book.db且book.db为空
-3. 运行以下命令
+2. 运行以下命令
 ```powershell
 python app.py
 ```
@@ -24,7 +23,7 @@ python app.py
 <a name="vp9Em"></a>
 ## 结构设计
 共4个文档集，订单，书籍，商店，用户，里面存储上图中的属性。除此以外，还存储它们之间的关系：
-```json
+```
 user: {
   user_id,
   user_name,
