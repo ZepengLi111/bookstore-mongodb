@@ -22,6 +22,7 @@ token | string | 登录产生的会话标识 | N
 {
     "user_id": "seller_id",
     "order_id": "order_id",
+    "store_id": "store_id"
 }
 ```
 
@@ -31,6 +32,7 @@ token | string | 登录产生的会话标识 | N
 ---|---|---|---
 user_id | string | 卖家用户ID | N
 order_id | string | 订单ID | N 
+store_id | string | 商店ID | N 
 
 #### Response
 
@@ -39,9 +41,11 @@ Status Code:
 码 | 描述
 --- | ---
 200 | 发货成功 
-5XX | 卖家用户ID不存在 
-5XX | 订单ID不存在 
-5XX | 订单状态错误 
+511 | 卖家用户ID不存 
+513 | 商店ID不存在 
+518 | 订单ID不存在 
+523 | 订单状态错误         
+524 | 商店ID和卖家ID不匹配 
 
 Body:
 ```
@@ -90,9 +94,9 @@ Status Code:
 | 码   | 描述             |
 | ---- | ---------------- |
 | 200  | 收货成功         |
-| 5XX  | 买家用户ID不存在 |
-| 5XX  | 订单ID不存在     |
-| 5XX  | 订单状态错误     |
+| 511  | 买家用户ID不存在 |
+| 5X3  | 订单ID不存在     |
+| 523  | 订单状态错误     |
 
 Body:
 ```
