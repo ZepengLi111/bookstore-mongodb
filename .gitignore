@@ -1,10 +1,4 @@
 **/__pycache__/
 app.log
-be/model/__pycache__/buyer.cpython-39.pyc
-be/model/__pycache__/error.cpython-39.pyc
-be/model/__pycache__/seller.cpython-39.pyc
-be/view/__pycache__/seller.cpython-39.pyc
-.gitignore
-______test.py
+.coverage
 app.py
-readme.md

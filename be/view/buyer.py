@@ -182,7 +182,7 @@ def search_canceled_order():
 
 @bp_buyer.route("/delete_order", methods=["POST"])
 def delete_order():
-    user_id: str = request.json.get("user_id")
+    user_id: str = request.json.get("buyer_id")
     order_id: str = request.json.get("order_id")
     token: str = request.headers.get("token")
     b = Buyer()

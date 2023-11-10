@@ -41,7 +41,7 @@ class Buyer(db_conn.DBConn):
             for book_id, count in id_and_count:
 
                 result = self.book.find_one({'belong_store_id': store_id, 'book_id':book_id})
-                print(result)
+                # print(result)
                 if result is None:
                     return error.error_non_exist_book_id(book_id) + (order_id,)
 
@@ -201,7 +201,7 @@ class Buyer(db_conn.DBConn):
                 return error.error_invalid_parameter(page) + ([],)
             return 200,'ok', results
         except Exception as e:
-            return 401, "{}".format(str(e)) + ([],)
+            return 401, "{}".format(str(e)), ([],)
     
     def search_in_store(self, keyword, page, store_id) -> (int, str, list):
         try:
@@ -218,7 +218,7 @@ class Buyer(db_conn.DBConn):
             results = list(results)
             return 200,'ok', results
         except Exception as e:
-            return 401, "{}".format(str(e)) + ([],)
+            return 401, "{}".format(str(e)), ([],)
 
     def search_order(self, user_id: str, token: str, search_state: int) -> (int, str, list):
         try:
