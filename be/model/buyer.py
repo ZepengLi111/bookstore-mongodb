@@ -88,28 +88,25 @@ class Buyer(db_conn.DBConn):
             store_id = result['seller_store_id']
             total_price = result['order_amount']
 
-            if buyer_id != user_id:
-                return error.error_authorization_fail()
-
-            result_1 = self.user.find_one({'user_id': buyer_id}, {'balance':1, "password":1})
-            print('result_1----->',result_1)
-            if result_1 is None:
-                return error.error_non_exist_user_id(buyer_id)
+            result_1 = self.user.find_one({'user_id': buyer_id}, {'balance': 1, "password": 1})
+            # print('result_1----->',result_1)
+            # if result_1 is None:
+            #     return error.error_non_exist_user_id(buyer_id)
             balance = result_1['balance']
             if password != result_1['password']:
                 return error.error_authorization_fail()
 
-            result_2 = self.store.find_one({'store_id': store_id})
-            print('result_2----->',result_2)
-            if result_2 is None:
-                return error.error_non_exist_store_id(store_id)
+            # result_2 = self.store.find_one({'store_id': store_id})
+            # print('result_2----->',result_2)
+            # if result_2 is None:
+            #     return error.error_non_exist_store_id(store_id)
 
-            seller_id = result_2['seller_id']
+            # seller_id = result_2['seller_id']
 
-            if not self.user_id_exist(seller_id):
-                return error.error_non_exist_user_id(seller_id)
+            # if not self.user_id_exist(seller_id):
+            #     return error.error_non_exist_user_id(seller_id)
 
-            print('total_price----->', total_price)
+            # print('total_price----->', total_price)
 
             if balance < total_price:
                 return error.error_account_balance(buyer_id)
@@ -117,18 +114,17 @@ class Buyer(db_conn.DBConn):
             result_4 = self.user.update_one({'user_id': buyer_id, 'balance':{'$gte':total_price}}, {'$inc': {'balance': (0-total_price)}})
             # print('result_4----->',result_4)
 
-            if result_4.modified_count == 0:
-                return error.error_not_sufficient_funds(order_id)
+            # if result_4.modified_count == 0:
+            #     return error.error_not_sufficient_funds(order_id)
 
             result_6 = self.order.update_one({'order_id': order_id},{'$set': {'state': 1}})
             # print('result_6----->',result_6)
 
-            if result_6.modified_count == 0:
-                return error.error_invalid_order_id(order_id)
+            # if result_6.modified_count == 0:
+            #     return error.error_invalid_order_id(order_id)
 
         except errors.PyMongoError as e:
             return 528, "{}".format(str(e))
-
         except BaseException as e:
             return 530, "{}".format(str(e))
 
@@ -144,8 +140,8 @@ class Buyer(db_conn.DBConn):
                 return error.error_authorization_fail()
 
             result = self.user.update_one({'user_id': user_id},{'$inc': {'balance': add_value}})
-            if result.modified_count == 0:
-                return error.error_non_exist_user_id(user_id)
+            # if result.modified_count == 0:
+            #     return error.error_non_exist_user_id(user_id)
 
         except errors.PyMongoError as e:
             return 528, "{}".format(str(e))
@@ -158,8 +154,8 @@ class Buyer(db_conn.DBConn):
             code, message = self.User.check_token(user_id, token)
             if code != 200:
                 return code, message
-            if not self.user_id_exist(user_id):
-                return error.error_non_exist_user_id(user_id)
+            # if not self.user_id_exist(user_id):
+            #     return error.error_non_exist_user_id(user_id)
             
             result_order = self.order.find_one({"order_id": order_id})
             if result_order is None:
