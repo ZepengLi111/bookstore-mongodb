@@ -9212,3 +9212,4 @@ DEBUG:jieba:Loading model cost 0.691 seconds.
 DEBUG:jieba:Prefix dict has been built successfully.
 INFO:werkzeug:127.0.0.1 - - [05/Nov/2023 16:53:05] "POST /buyer/search_global HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [05/Nov/2023 16:53:13] "POST /buyer/search_global HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
