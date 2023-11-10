@@ -1,1 +1,6 @@
 **/__pycache__/
+/.coverage
+/htmlcov
+setup.py
+/script
+/venv
