@@ -70,8 +70,8 @@ class Buyer(db_conn.DBConn):
             self.order.insert_one(new_order_data)
             order_id = uid
         except sqlite.Error as e:
-            logging.info("528, {}".format(str(e)))
-            return 528, "{}".format(str(e)), ""
+            logging.info("520, {}".format(str(e)))
+            return error.database_error(e) + ("",)
         except BaseException as e:
             logging.info("530, {}".format(str(e)))
             return 530, "{}".format(str(e)), ""
@@ -127,7 +127,7 @@ class Buyer(db_conn.DBConn):
                 return error.error_invalid_order_id(order_id)
 
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
 
         except BaseException as e:
             return 530, "{}".format(str(e))
@@ -148,7 +148,7 @@ class Buyer(db_conn.DBConn):
                 return error.error_non_exist_user_id(user_id)
 
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
         except BaseException as e:
             return 530, "{}".format(str(e))
         return 200, "ok"
@@ -170,7 +170,7 @@ class Buyer(db_conn.DBConn):
                 result = self.order.update_one({"order_id": order_id, "buyer_id": user_id}, {"$set": {"state": 3}})
 
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
         except BaseException as e:
             return 530, "{}".format(str(e))
 
@@ -285,7 +285,7 @@ class Buyer(db_conn.DBConn):
             for order in orders:
                 order_col.delete_one({"order_id": order["order_id"]})
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return error.database_error(e)
         except BaseException as e:
             return 530, "{}".format(str(e))
         return 200, "ok"
