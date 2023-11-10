@@ -99,8 +99,6 @@ class Seller(db_conn.DBConn):
                 return error.error_order_state(result_order['state'])
             else:
                 result = self.order.update_one({"order_id": order_id, "seller_store_id": store_id}, {"$set": {"state": 2}})
-                return 200, "ok"
-            
 
         except errors.PyMongoError as e:
             return error.database_error(e)
