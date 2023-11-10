@@ -51,9 +51,9 @@ def send():
     user_id: str = request.json.get("user_id")
     order_id: str = request.json.get("order_id")
     token: str = request.headers.get("token")
-    s = Buyer()
+    b = Buyer()
     b.delete_order_time()
-    code, message = s.receive(user_id, order_id, token)
+    code, message = b.receive(user_id, order_id, token)
     return jsonify({"message": message}), code
 
 
