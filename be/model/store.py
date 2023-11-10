@@ -23,7 +23,9 @@ class Store:
             self.mydb['book'].create_index([("_t", pymongo.TEXT)])
             print('---------->索引命中！')
         except Exception as e:
+            print(e)
             print('---------->已存在索引！')
+
         return self.mydb
 
 database_instance: Store = None

@@ -1,4 +1,10 @@
 **/__pycache__/
+/.coverage
+/.idea
+/.pytest_cache
+/htmlcov
+setup.py
+/script
+/venv
 app.log
-.coverage
 app.py

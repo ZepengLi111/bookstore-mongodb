@@ -30,13 +30,13 @@ class Seller(db_conn.DBConn):
             if code != 200:
                 return code, message
             if not self.user_id_exist(user_id):
-                print('----->1')
+                # print('----->1')
                 return error.error_non_exist_user_id(user_id)
             if not self.store_id_exist(store_id):
-                print('----->2')
+                # print('----->2')
                 return error.error_non_exist_store_id(store_id)
             if self.book_id_exist(store_id, book_id):
-                print('----->3')
+                # print('----->3')
                 return error.error_exist_book_id(book_id)
             book_dict = json.loads(book_json_str)
             del book_dict['id']
