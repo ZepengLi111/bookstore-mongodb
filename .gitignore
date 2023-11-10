@@ -8,3 +8,4 @@ setup.py
 /venv
 app.log
 app.py
+.coverage
