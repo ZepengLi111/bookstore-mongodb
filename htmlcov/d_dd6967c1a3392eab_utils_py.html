@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Coverage for fe\data\utils.py: 97%</title>
+    <link rel="icon" sizes="32x32" href="favicon_32.png">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script type="text/javascript" src="coverage_html.js" defer></script>
+</head>
+<body class="pyfile">
+<header>
+    <div class="content">
+        <h1>
+            <span class="text">Coverage for </span><b>fe\data\utils.py</b>:
+            <span class="pc_cov">97%</span>
+        </h1>
+        <aside id="help_panel_wrapper">
+            <input id="help_panel_state" type="checkbox">
+            <label for="help_panel_state">
+                <img id="keyboard_icon" src="keybd_closed.png" alt="Show/hide keyboard shortcuts" />
+            </label>
+            <div id="help_panel">
+                <p class="legend">Shortcuts on this page</p>
+                <div class="keyhelp">
+                    <p>
+                        <kbd>r</kbd>
+                        <kbd>m</kbd>
+                        <kbd>x</kbd>
+                        <kbd>p</kbd>
+                        &nbsp; toggle line displays
+                    </p>
+                    <p>
+                        <kbd>j</kbd>
+                        <kbd>k</kbd>
+                        &nbsp; next/prev highlighted chunk
+                    </p>
+                    <p>
+                        <kbd>0</kbd> &nbsp; (zero) top of page
+                    </p>
+                    <p>
+                        <kbd>1</kbd> &nbsp; (one) first highlighted chunk
+                    </p>
+                    <p>
+                        <kbd>[</kbd>
+                        <kbd>]</kbd>
+                        &nbsp; prev/next file
+                    </p>
+                    <p>
+                        <kbd>u</kbd> &nbsp; up to the index
+                    </p>
+                    <p>
+                        <kbd>?</kbd> &nbsp; show/hide this help
+                    </p>
+                </div>
+            </div>
+        </aside>
+        <h2>
+            <span class="text">22 statements &nbsp;</span>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">22<span class="text"> run</span></button>
+            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">0<span class="text"> missing</span></button>
+            <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">0<span class="text"> excluded</span></button>
+            <button type="button" class="par run show_par button_toggle_par" value="par" data-shortcut="p" title="Toggle lines partially run">1<span class="text"> partial</span></button>
+        </h2>
+        <p class="text">
+            <a id="prevFileLink" class="nav" href="d_9ffa8e6b64436dbb_conftest_py.html">&#xab; prev</a> &nbsp; &nbsp;
+            <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
+            <a id="nextFileLink" class="nav" href="d_f7a6e81cea0338db_gen_book_data_py.html">&#xbb; next</a>
+            &nbsp; &nbsp; &nbsp;
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.3.2">coverage.py v7.3.2</a>,
+            created at 2023-11-10 22:51 +0800
+        </p>
+        <aside class="hidden">
+            <button type="button" class="button_next_chunk" data-shortcut="j"/>
+            <button type="button" class="button_prev_chunk" data-shortcut="k"/>
+            <button type="button" class="button_top_of_page" data-shortcut="0"/>
+            <button type="button" class="button_first_chunk" data-shortcut="1"/>
+            <button type="button" class="button_prev_file" data-shortcut="["/>
+            <button type="button" class="button_next_file" data-shortcut="]"/>
+            <button type="button" class="button_to_index" data-shortcut="u"/>
+            <button type="button" class="button_show_hide_help" data-shortcut="?"/>
+        </aside>
+    </div>
+</header>
+<main id="source">
+    <p class="run"><span class="n"><a id="t1" href="#t1">1</a></span><span class="t"><span class="key">import</span> <span class="nam">jieba</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t2" href="#t2">2</a></span><span class="t"><span class="key">import</span> <span class="nam">random</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t3" href="#t3">3</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t4" href="#t4">4</a></span><span class="t"><span class="key">def</span> <span class="nam">cut_word</span><span class="op">(</span><span class="nam">text</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t5" href="#t5">5</a></span><span class="t">    <span class="nam">stopwords</span> <span class="op">=</span> <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t6" href="#t6">6</a></span><span class="t">        <span class="str">"&#8213;"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t7" href="#t7">7</a></span><span class="t">        <span class="str">"&#8220;"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t8" href="#t8">8</a></span><span class="t">        <span class="str">"&#8221;"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t9" href="#t9">9</a></span><span class="t">        <span class="str">"&#12290;"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t10" href="#t10">10</a></span><span class="t">        <span class="str">"    "</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t11" href="#t11">11</a></span><span class="t">        <span class="str">"."</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t12" href="#t12">12</a></span><span class="t">        <span class="str">"'"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t13" href="#t13">13</a></span><span class="t">        <span class="str">"&#65292;"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t14" href="#t14">14</a></span><span class="t">        <span class="str">"\n"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t15" href="#t15">15</a></span><span class="t">        <span class="str">"]"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t16" href="#t16">16</a></span><span class="t">        <span class="str">"["</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t17" href="#t17">17</a></span><span class="t">        <span class="str">"&#183;"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t18" href="#t18">18</a></span><span class="t">        <span class="str">"("</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t19" href="#t19">19</a></span><span class="t">        <span class="str">")"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t20" href="#t20">20</a></span><span class="t">        <span class="str">"&#65288;"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t21" href="#t21">21</a></span><span class="t">        <span class="str">"&#65289;"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t22" href="#t22">22</a></span><span class="t">        <span class="str">"&#65307;"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t23" href="#t23">23</a></span><span class="t">        <span class="str">"..."</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t24" href="#t24">24</a></span><span class="t">        <span class="str">"......"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t25" href="#t25">25</a></span><span class="t">    <span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t26" href="#t26">26</a></span><span class="t">    <span class="key">if</span> <span class="nam">text</span> <span class="op">!=</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">26&#x202F;&#x219B;&#x202F;exit</span><span class="annotate long">line 26 didn't return from function 'cut_word', because the condition on line 26 was never false</span></span></p>
+    <p class="run"><span class="n"><a id="t27" href="#t27">27</a></span><span class="t">        <span class="nam">text_cutted</span> <span class="op">=</span> <span class="nam">jieba</span><span class="op">.</span><span class="nam">cut</span><span class="op">(</span><span class="nam">str</span><span class="op">(</span><span class="nam">text</span><span class="op">)</span><span class="op">)</span>  <span class="com"># jieba</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t28" href="#t28">28</a></span><span class="t">        <span class="nam">words</span> <span class="op">=</span> <span class="op">[</span><span class="nam">word</span> <span class="key">for</span> <span class="nam">word</span> <span class="key">in</span> <span class="nam">text_cutted</span> <span class="key">if</span> <span class="nam">word</span> <span class="key">not</span> <span class="key">in</span> <span class="nam">stopwords</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t29" href="#t29">29</a></span><span class="t">        <span class="key">return</span> <span class="nam">words</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t30" href="#t30">30</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t31" href="#t31">31</a></span><span class="t"><span class="key">def</span> <span class="nam">gen__t</span><span class="op">(</span><span class="nam">book_dict</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t32" href="#t32">32</a></span><span class="t">    <span class="nam">_t_insert</span> <span class="op">=</span> <span class="op">[</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t33" href="#t33">33</a></span><span class="t">    <span class="nam">attrs</span> <span class="op">=</span> <span class="op">[</span><span class="str">'title'</span><span class="op">,</span> <span class="str">'author'</span><span class="op">,</span> <span class="str">'tags'</span><span class="op">,</span> <span class="str">'author_intro'</span><span class="op">,</span> <span class="str">'book_intro'</span><span class="op">,</span> <span class="str">'content'</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t34" href="#t34">34</a></span><span class="t">    <span class="key">for</span> <span class="nam">attr</span> <span class="key">in</span> <span class="nam">attrs</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t35" href="#t35">35</a></span><span class="t">        <span class="nam">text</span> <span class="op">=</span> <span class="nam">book_dict</span><span class="op">[</span><span class="nam">attr</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t36" href="#t36">36</a></span><span class="t">        <span class="key">if</span> <span class="nam">text</span> <span class="op">!=</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t37" href="#t37">37</a></span><span class="t">            <span class="nam">_t_insert</span><span class="op">.</span><span class="nam">extend</span><span class="op">(</span><span class="nam">cut_word</span><span class="op">(</span><span class="nam">text</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t38" href="#t38">38</a></span><span class="t">    <span class="key">return</span> <span class="str">' '</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="nam">_t_insert</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t39" href="#t39">39</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t40" href="#t40">40</a></span><span class="t"><span class="key">def</span> <span class="nam">gen_random_keyword</span><span class="op">(</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t41" href="#t41">41</a></span><span class="t">    <span class="com"># fake = Faker('zh_CN')</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t42" href="#t42">42</a></span><span class="t">    <span class="com"># sentence_length = random.randint(5, 10)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t43" href="#t43">43</a></span><span class="t">    <span class="com"># sentence = fake.text(max_nb_chars=sentence_length)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t44" href="#t44">44</a></span><span class="t">    <span class="com"># return sentence[:-1]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t45" href="#t45">45</a></span><span class="t">    <span class="nam">chinese_chars</span> <span class="op">=</span> <span class="str">"""&#30446;&#24405;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t46" href="#t46">46</a></span><span class="t"><span class="str">&#20462;&#35746;&#26412;&#20986;&#29256;&#32773;&#24207;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t47" href="#t47">47</a></span><span class="t"><span class="str">&#20320;&#20010;&#20154;&#36890;&#21521;21&#19990;&#32426;&#30340;&#20132;&#20114;&#24335;&#25252;&#29031;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t48" href="#t48">48</a></span><span class="t"><span class="str">&#21069;&#35328;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t49" href="#t49">49</a></span><span class="t"><span class="str">&#20851;&#20110;&#28201;&#21644;&#38761;&#21629;&#30340;&#25351;&#21335;&#65306;&#21464;&#32477;&#26395;&#20026;&#24076;&#26395;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t50" href="#t50">50</a></span><span class="t"><span class="str">&#23548;&#35770;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t51" href="#t51">51</a></span><span class="t"><span class="str">&#26159;&#26102;&#20505;&#20102;&#65306;&#22312;&#20960;&#20046;&#19968;&#20999;&#37117;&#21487;&#33021;&#30340;&#19990;&#30028;&#37324;&#25299;&#23485;&#20320;&#30340;&#35270;&#37326;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t52" href="#t52">52</a></span><span class="t"><span class="str">1.&#26410;&#26469;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t53" href="#t53">53</a></span><span class="t"><span class="str">&#22609;&#36896;&#26410;&#26469;&#19990;&#30028;&#30340;15&#31181;&#20027;&#35201;&#36235;&#21183;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t54" href="#t54">54</a></span><span class="t"><span class="str">1.&#21363;&#26102;&#36890;&#35759;&#26102;&#20195;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t55" href="#t55">55</a></span><span class="t"><span class="str">2.&#27809;&#26377;&#32463;&#27982;&#30086;&#30028;&#30340;&#19990;&#30028;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t56" href="#t56">56</a></span><span class="t"><span class="str">3.&#36808;&#21521;&#19990;&#30028;&#32463;&#27982;&#19968;&#20307;&#21270;&#30340;&#22235;&#20010;&#27493;&#39588;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t57" href="#t57">57</a></span><span class="t"><span class="str">4.&#26032;&#22411;&#30340;&#26381;&#21153;&#24615;&#31038;&#20250;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t58" href="#t58">58</a></span><span class="t"><span class="str">5.&#30001;&#22823;&#21464;&#23567;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t59" href="#t59">59</a></span><span class="t"><span class="str">6.&#20241;&#38386;&#26032;&#26102;&#20195;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t60" href="#t60">60</a></span><span class="t"><span class="str">7.&#19981;&#26029;&#21464;&#21270;&#30340;&#24037;&#20316;&#26041;&#24335;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t61" href="#t61">61</a></span><span class="t"><span class="str">8.&#22919;&#22899;&#25285;&#24403;&#39046;&#23548;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t62" href="#t62">62</a></span><span class="t"><span class="str">9.&#33041;&#30340;&#24180;&#20195;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t63" href="#t63">63</a></span><span class="t"><span class="str">10.&#25991;&#21270;&#27665;&#26063;&#20027;&#20041;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t64" href="#t64">64</a></span><span class="t"><span class="str">11.&#19981;&#26029;&#22686;&#38271;&#30340;&#20302;&#23618;&#38454;&#32423;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t65" href="#t65">65</a></span><span class="t"><span class="str">12.&#20154;&#21475;&#30340;&#24613;&#21095;&#32769;&#40836;&#21270;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t66" href="#t66">66</a></span><span class="t"><span class="str">13.&#26032;&#22411;&#8220;&#33258;&#24049;&#21160;&#25163;&#8221;&#39118;&#23578;&#30340;&#20852;&#36215;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t67" href="#t67">67</a></span><span class="t"><span class="str">14.&#21512;&#20316;&#20225;&#19994;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t68" href="#t68">68</a></span><span class="t"><span class="str">15 &#20010;&#20154;&#30340;&#32988;&#21033;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t69" href="#t69">69</a></span><span class="t"><span class="str">2.&#20026;&#20160;&#20040;&#20320;&#19981;&#35201;&#26368;&#22909;&#30340;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t70" href="#t70">70</a></span><span class="t"><span class="str">&#21019;&#36896;&#19990;&#30028;&#19978;&#26368;&#20339;&#25945;&#32946;&#20307;&#21046;&#25152;&#24517;&#38656;&#30340;13&#20010;&#27493;&#39588;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t71" href="#t71">71</a></span><span class="t"><span class="str">1.&#30005;&#23376;&#36890;&#35759;&#30340;&#20316;&#29992;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t72" href="#t72">72</a></span><span class="t"><span class="str">2.&#27599;&#20010;&#20154;&#24517;&#39035;&#36890;&#26195;&#30005;&#33041;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t73" href="#t73">73</a></span><span class="t"><span class="str">3.&#23478;&#38271;&#25945;&#32946;&#20127;&#24453;&#25552;&#39640;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t74" href="#t74">74</a></span><span class="t"><span class="str">4.&#20799;&#31461;&#26089;&#26399;&#20581;&#24247;&#26381;&#21153;&#30340;&#37325;&#28857;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t75" href="#t75">75</a></span><span class="t"><span class="str">5.&#20799;&#31461;&#26089;&#26399;&#22521;&#20859;&#35745;&#21010;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t76" href="#t76">76</a></span><span class="t"><span class="str">6.&#22312;&#20219;&#20309;&#38454;&#27573;&#20320;&#37117;&#33021;&#36214;&#19978;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t77" href="#t77">77</a></span><span class="t"><span class="str">7.&#36866;&#21512;&#27599;&#20010;&#20010;&#20307;&#30340;&#23398;&#20064;&#31867;&#22411;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t78" href="#t78">78</a></span><span class="t"><span class="str">8.&#23398;&#20064;&#24590;&#26679;&#23398;&#20064;&#21644;&#23398;&#20064;&#24590;&#26679;&#24605;&#32771;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t79" href="#t79">79</a></span><span class="t"><span class="str">9.&#23398;&#26657;&#24212;&#35813;&#25945;&#20160;&#20040;&#65311;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t80" href="#t80">80</a></span><span class="t"><span class="str">10.&#22235;&#20010;&#23618;&#38754;&#19978;&#30340;&#23398;&#20064;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t81" href="#t81">81</a></span><span class="t"><span class="str">11.&#23398;&#20064;&#30340;&#19977;&#37325;&#30446;&#30340;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t82" href="#t82">82</a></span><span class="t"><span class="str">12.&#25105;&#20204;&#24212;&#35813;&#22312;&#20160;&#20040;&#22320;&#26041;&#25945;&#23398;&#65311;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t83" href="#t83">83</a></span><span class="t"><span class="str">13 &#31616;&#27905;&#26126;&#20102;&#12289;&#21435;&#38500;&#34892;&#35805;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t84" href="#t84">84</a></span><span class="t"><span class="str">3.&#35748;&#35782;&#22855;&#22937;&#30340;&#20154;&#33041;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t85" href="#t85">85</a></span><span class="t"><span class="str">&#20320;&#25317;&#26377;&#30528;&#19990;&#30028;&#19978;&#21151;&#33021;&#26368;&#24378;&#30340;&#30005;&#33041;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t86" href="#t86">86</a></span><span class="t"><span class="str">&#19977;&#33041;&#21512;&#19968;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t87" href="#t87">87</a></span><span class="t"><span class="str">&#31070;&#32463;&#32454;&#32990;&#12289;&#26641;&#31361;&#12289;&#31070;&#32463;&#33014;&#36136;&#32454;&#32990;&#21644;&#38548;&#31163;&#31995;&#32479;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t88" href="#t88">88</a></span><span class="t"><span class="str">&#20320;&#26377;7&#20010;&#19981;&#21516;&#30340;&#8220;&#26234;&#21147;&#20013;&#24515;&#8221;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t89" href="#t89">89</a></span><span class="t"><span class="str">&#20154;&#33041;&#30340;&#20004;&#20010;&#37096;&#20998;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t90" href="#t90">90</a></span><span class="t"><span class="str">&#22823;&#33041;&#22914;&#20309;&#23384;&#20648;&#20449;&#24687;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t91" href="#t91">91</a></span><span class="t"><span class="str">&#22235;&#31181;&#19981;&#21516;&#30340;&#27874;&#38271;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t92" href="#t92">92</a></span><span class="t"><span class="str">&#22823;&#33041;&#20381;&#38752;&#27687;&#27668;&#21644;&#33889;&#33796;&#31958;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t93" href="#t93">93</a></span><span class="t"><span class="str">&#20851;&#20110;&#22823;&#33041;&#39135;&#29289;&#30340;&#31616;&#21333;&#25552;&#31034;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t94" href="#t94">94</a></span><span class="t"><span class="str">4.&#33258;&#24049;&#21160;&#25163;&#25351;&#21335;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t95" href="#t95">95</a></span><span class="t"><span class="str">&#20351;&#23398;&#20064;&#25928;&#29575;&#25552;&#39640;5&#20493;&#30340;20&#20010;&#36215;&#22987;&#27493;&#39588;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t96" href="#t96">96</a></span><span class="t"><span class="str">1.&#20174;&#20307;&#32946;&#32473;&#20154;&#30340;&#21551;&#31034;&#24320;&#22987;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t97" href="#t97">97</a></span><span class="t"><span class="str">2.&#25954;&#20110;&#26790;&#24819;&#12289;&#25954;&#20110;&#24819;&#35937;&#20320;&#30340;&#26410;&#26469;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t98" href="#t98">98</a></span><span class="t"><span class="str">3.&#35774;&#31435;&#29305;&#23450;&#30340;&#30446;&#26631;&#24182;&#35268;&#23450;&#26399;&#38480;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t99" href="#t99">99</a></span><span class="t"><span class="str">4.&#23613;&#24555;&#25214;&#19968;&#20301;&#23500;&#26377;&#28608;&#24773;&#30340;&#23548;&#24072;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t100" href="#t100">100</a></span><span class="t"><span class="str">5.&#39318;&#20808;&#20174;&#27010;&#35980;&#24320;&#22987;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t101" href="#t101">101</a></span><span class="t"><span class="str">6.&#22810;&#38382;&#65281;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t102" href="#t102">102</a></span><span class="t"><span class="str">7.&#25214;&#20986;&#20027;&#35201;&#21407;&#21017;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t103" href="#t103">103</a></span><span class="t"><span class="str">8.&#25214;&#26377;&#23454;&#36341;&#32463;&#39564;&#30340;&#25104;&#21151;&#32773;&#25776;&#20889;&#30340;&#19977;&#26412;&#26368;&#22909;&#30340;&#20070;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t104" href="#t104">104</a></span><span class="t"><span class="str">9&#37325;&#26032;&#23398;&#20064;&#24590;&#26679;&#38405;&#35835;&#8213;&#8213;&#26356;&#24555;&#12289;&#26356;&#22909;&#12289;&#26356;&#36731;&#26494;&#22320;&#35835;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t105" href="#t105">105</a></span><span class="t"><span class="str">10.&#29992;&#22270;&#20687;&#21644;&#22768;&#38899;&#24378;&#21270;&#23398;&#20064;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t106" href="#t106">106</a></span><span class="t"><span class="str">11.&#36890;&#36807;&#21160;&#25163;&#26469;&#23398;&#20064;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t107" href="#t107">107</a></span><span class="t"><span class="str">12.&#19981;&#35201;&#19968;&#34892;&#34892;&#22320;&#20316;&#35760;&#24405;&#8213;&#8213;&#30011;&#33041;&#22270;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t108" href="#t108">108</a></span><span class="t"><span class="str">13.&#21796;&#22238;&#35760;&#24518;&#30340;&#31616;&#20415;&#26041;&#27861;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t109" href="#t109">109</a></span><span class="t"><span class="str">14.&#23398;&#20064;&#25918;&#26494;&#24615;&#35686;&#35273;&#30340;&#33402;&#26415;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t110" href="#t110">110</a></span><span class="t"><span class="str">15.&#23454;&#36341;&#65292;&#23454;&#36341;&#65292;&#20877;&#23454;&#36341;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t111" href="#t111">111</a></span><span class="t"><span class="str">16.&#22797;&#20064;&#21644;&#22238;&#24518;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t112" href="#t112">112</a></span><span class="t"><span class="str">17.&#20351;&#29992;&#20851;&#32852;&#24037;&#20855;&#21644;&#8220;&#35760;&#24518;&#38057;&#8221;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t113" href="#t113">113</a></span><span class="t"><span class="str">18.&#36259;&#21619;&#21644;&#28216;&#25103;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t114" href="#t114">114</a></span><span class="t"><span class="str">19.&#22909;&#20026;&#20154;&#24072;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t115" href="#t115">115</a></span><span class="t"><span class="str">20.&#35835;&#19968;&#38376;&#24555;&#36895;&#23398;&#20064;&#35838;&#31243;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t116" href="#t116">116</a></span><span class="t"><span class="str">5.&#24590;&#26679;&#20135;&#29983;&#32477;&#22937;&#30340;&#21019;&#24847;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t117" href="#t117">117</a></span><span class="t"><span class="str">&#21830;&#19994;&#12289;&#23398;&#19994;&#21644;&#29983;&#27963;&#20013;&#21019;&#24847;&#24605;&#32500;12&#27493;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t118" href="#t118">118</a></span><span class="t"><span class="str">1.&#30028;&#23450;&#20320;&#30340;&#38382;&#39064;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t119" href="#t119">119</a></span><span class="t"><span class="str">2.&#30028;&#23450;&#26368;&#20339;&#32467;&#26524;&#24182;&#35774;&#24819;&#23427;&#22914;&#20309;&#23454;&#29616;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t120" href="#t120">120</a></span><span class="t"><span class="str">3.&#25910;&#38598;&#25152;&#26377;&#30340;&#26448;&#26009;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t121" href="#t121">121</a></span><span class="t"><span class="str">4.&#25171;&#30772;&#27169;&#24335;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t122" href="#t122">122</a></span><span class="t"><span class="str">5.&#36208;&#20986;&#20320;&#33258;&#24049;&#30340;&#39046;&#22495;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t123" href="#t123">123</a></span><span class="t"><span class="str">6.&#23581;&#35797;&#21508;&#31181;&#21508;&#26679;&#30340;&#32452;&#21512;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t124" href="#t124">124</a></span><span class="t"><span class="str">7.&#20351;&#29992;&#20320;&#25152;&#26377;&#30340;&#24863;&#23448;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t125" href="#t125">125</a></span><span class="t"><span class="str">8.&#20851;&#25481;&#8213;&#8213;&#35753;&#23427;&#37213;&#37247;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t126" href="#t126">126</a></span><span class="t"><span class="str">9.&#21033;&#29992;&#38899;&#20048;&#25110;&#33258;&#28982;&#25918;&#26494;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t127" href="#t127">127</a></span><span class="t"><span class="str">10.&#25226;&#23427;&#24102;&#36827;&#30561;&#30496;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t128" href="#t128">128</a></span><span class="t"><span class="str">11.&#25105;&#25214;&#21040;&#20102;&#65281;&#23427;&#31361;&#28982;&#20986;&#29616;&#20102;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t129" href="#t129">129</a></span><span class="t"><span class="str">12.&#20877;&#26816;&#39564;&#23427;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t130" href="#t130">130</a></span><span class="t"><span class="str">6.&#20174;&#24320;&#22987;&#23601;&#35201;&#27491;&#30830;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t131" href="#t131">131</a></span><span class="t"><span class="str">&#29983;&#20986;&#26356;&#22909;&#12289;&#26356;&#32874;&#26126;&#30340;&#23156;&#20799;&#30340;&#23454;&#29992;&#25351;&#21335;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t132" href="#t132">132</a></span><span class="t"><span class="str">7.&#20851;&#38190;&#30340;&#20960;&#24180;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t133" href="#t133">133</a></span><span class="t"><span class="str">&#24590;&#26679;&#22686;&#36827;0&#65374;8&#23681;&#20799;&#31461;&#26234;&#33021;&#30340;&#21457;&#23637;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t134" href="#t134">134</a></span><span class="t"><span class="str">1&#19968;&#27493;&#27493;&#27963;&#21160;&#30340;&#33267;&#20851;&#37325;&#35201;&#24615;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t135" href="#t135">135</a></span><span class="t"><span class="str">2.&#36816;&#29992;&#20320;&#30340;&#24120;&#35782;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t136" href="#t136">136</a></span><span class="t"><span class="str">3.&#20116;&#31181;&#24863;&#35273;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t137" href="#t137">137</a></span><span class="t"><span class="str">4.&#25226;&#25972;&#20010;&#19990;&#30028;&#20316;&#20026;&#20320;&#30340;&#35838;&#22530;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t138" href="#t138">138</a></span><span class="t"><span class="str">5.&#20132;&#27969;&#30340;&#20255;&#22823;&#33402;&#26415;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t139" href="#t139">139</a></span><span class="t"><span class="str">6.&#29238;&#27597;&#26159;&#23401;&#23376;&#30340;&#21551;&#33945;&#32769;&#24072;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t140" href="#t140">140</a></span><span class="t"><span class="str">7.&#24188;&#20799;&#22253;&#20013;&#24515;&#30340;&#29238;&#27597;&#20204;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t141" href="#t141">141</a></span><span class="t"><span class="str">8.&#22312;&#23398;&#26657;&#37324;&#32487;&#32493;&#21516;&#26679;&#30340;&#20805;&#28385;&#20048;&#36259;&#30340;&#25945;&#23398;&#26041;&#27861;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t142" href="#t142">142</a></span><span class="t"><span class="str">8&#23398;&#20064;&#30340;&#31192;&#23494;&#26680;&#24515;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t143" href="#t143">143</a></span><span class="t"><span class="str">&#24590;&#26679;&#20687;&#35268;&#21010;&#21830;&#19994;&#19968;&#26679;&#25104;&#21151;&#22320;&#35268;&#21010;&#25945;&#32946;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t144" href="#t144">144</a></span><span class="t"><span class="str">9.&#30495;&#27491;&#30340;&#23398;&#20064;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t145" href="#t145">145</a></span><span class="t"><span class="str">&#22312;&#23398;&#20064;&#21644;&#24037;&#20316;&#20013;&#25913;&#38761;&#25945;&#32946;&#30340;&#26377;&#36259;&#24555;&#25463;&#30340;&#26041;&#27861;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t146" href="#t146">146</a></span><span class="t"><span class="str">1.&#26368;&#20339;&#30340;&#23398;&#20064;&#29366;&#24577;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t147" href="#t147">147</a></span><span class="t"><span class="str">2.&#36890;&#21521;&#20248;&#31168;&#25480;&#35838;&#30340;&#20851;&#38190;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t148" href="#t148">148</a></span><span class="t"><span class="str">3.&#24605;&#32771;&#23427;&#65292;&#20648;&#23384;&#21040;&#28145;&#23618;&#35760;&#24518;&#20013;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t149" href="#t149">149</a></span><span class="t"><span class="str">4.&#28608;&#27963;&#20449;&#24687;&#20197;&#21152;&#24378;&#23398;&#20064;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t150" href="#t150">150</a></span><span class="t"><span class="str">5.&#36816;&#29992;&#23427;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t151" href="#t151">151</a></span><span class="t"><span class="str">6.&#22797;&#20064;&#21644;&#35780;&#20272;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t152" href="#t152">152</a></span><span class="t"><span class="str">7.&#24198;&#31069;&#27599;&#19968;&#20010;&#25104;&#21151;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t153" href="#t153">153</a></span><span class="t"><span class="str">&#25226;&#25152;&#26377;&#30340;&#21407;&#21017;&#21512;&#22312;&#19968;&#36215;&#36816;&#29992;&#30340;&#23454;&#20363;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t154" href="#t154">154</a></span><span class="t"><span class="str">&#37325;&#22823;&#31361;&#30772;&#30340;&#20256;&#25773;&#21313;&#20998;&#32531;&#24930;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t155" href="#t155">155</a></span><span class="t"><span class="str">10.&#26681;&#25454;&#31867;&#22411;&#26469;&#20570;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t156" href="#t156">156</a></span><span class="t"><span class="str">&#22914;&#20309;&#21457;&#29616;&#33258;&#24049;&#30340;&#23398;&#20064;&#31867;&#22411;&#24182;&#20351;&#29992;&#22810;&#26041;&#38754;&#30340;&#26234;&#21147;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t157" href="#t157">157</a></span><span class="t"><span class="str">&#27979;&#23450;&#20320;&#30340;&#23398;&#20064;&#31867;&#22411;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t158" href="#t158">158</a></span><span class="t"><span class="str">&#20320;&#26159;&#22914;&#20309;&#21560;&#25910;&#20449;&#24687;&#30340;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t159" href="#t159">159</a></span><span class="t"><span class="str">&#20320;&#26159;&#22914;&#20309;&#32452;&#32455;&#21644;&#21152;&#24037;&#20449;&#24687;&#30340;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t160" href="#t160">160</a></span><span class="t"><span class="str">&#24433;&#21709;&#20320;&#23398;&#20064;&#33021;&#21147;&#30340;&#26465;&#20214;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t161" href="#t161">161</a></span><span class="t"><span class="str">&#24433;&#21709;&#23398;&#20064;&#30340;&#29289;&#36136;&#21644;&#29983;&#29289;&#38656;&#27714;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t162" href="#t162">162</a></span><span class="t"><span class="str">&#22914;&#20309;&#30830;&#23450;&#23398;&#29983;&#25152;&#20559;&#21521;&#30340;&#23398;&#20064;&#31867;&#22411;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t163" href="#t163">163</a></span><span class="t"><span class="str">&#20320;&#29420;&#29305;&#30340;&#24037;&#20316;&#31867;&#22411;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t164" href="#t164">164</a></span><span class="t"><span class="str">&#22235;&#31181;&#24605;&#32500;&#31867;&#22411;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t165" href="#t165">165</a></span><span class="t"><span class="str">&#23545;&#23398;&#26657;&#21644;&#20010;&#20154;&#30340;&#24433;&#21709;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t166" href="#t166">166</a></span><span class="t"><span class="str">11.&#22312;&#23398;&#26657;&#24555;&#36895;&#8220;&#36814;&#22836;&#36214;&#19978;&#8221;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t167" href="#t167">167</a></span><span class="t"><span class="str">&#21482;&#35201;&#25214;&#21040;&#27491;&#30830;&#30340;&#25353;&#38062;&#65292;&#23398;&#20064;&#23601;&#20250;&#19968;&#28857;&#32780;&#36890;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t168" href="#t168">168</a></span><span class="t"><span class="str">&#20004;&#26465;&#20851;&#38190;&#30340;&#21407;&#21017;&#65306;&#24605;&#24819;&#19968;&#22823;&#33041;&#30340;&#36830;&#25509;&#21644;&#24605;&#24819;&#19968;&#36523;&#20307;&#30340;&#36830;&#25509;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t169" href="#t169">169</a></span><span class="t"><span class="str">&#29305;&#27530;&#36816;&#21160;&#23398;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t170" href="#t170">170</a></span><span class="t"><span class="str">&#22810;&#26364;&#19968;&#24085;&#23572;&#40664;&#19968;&#21704;&#33922;&#26356;&#27169;&#24335;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t171" href="#t171">171</a></span><span class="t"><span class="str">&#29699;/&#26641;&#26525;/&#40479;&#26041;&#27861;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t172" href="#t172">172</a></span><span class="t"><span class="str">&#22312;&#25340;&#20889;&#26041;&#38754;&#36814;&#22836;&#36214;&#19978;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t173" href="#t173">173</a></span><span class="t"><span class="str">&#20351;&#29992;&#22312;&#32972;&#19978;&#20070;&#20889;&#30340;&#26041;&#27861;&#26469;&#35299;&#20915;&#21453;&#21521;&#20070;&#20889;&#30340;&#38382;&#39064;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t174" href="#t174">174</a></span><span class="t"><span class="str">&#26032;&#35199;&#20848;&#30340;&#31361;&#30772;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t175" href="#t175">175</a></span><span class="t"><span class="str">&#22235;&#20998;&#38047;&#38405;&#35835;&#35838;&#31243;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t176" href="#t176">176</a></span><span class="t"><span class="str">&#29992;&#24405;&#38899;&#24102;&#36741;&#21161;&#30340;&#38405;&#35835;&#26041;&#26696;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t177" href="#t177">177</a></span><span class="t"><span class="str">&#21516;&#20276;&#25351;&#23548;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t178" href="#t178">178</a></span><span class="t"><span class="str">&#8220;&#30475;&#12289;&#21548;&#8221;&#26041;&#27861;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t179" href="#t179">179</a></span><span class="t"><span class="str">&#26032;&#35199;&#20848;&#30340;&#38405;&#35835;&#24247;&#22797;&#26041;&#26696;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t180" href="#t180">180</a></span><span class="t"><span class="str">&#20010;&#20154;&#30340;&#20851;&#38190;&#35789;&#27719;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t181" href="#t181">181</a></span><span class="t"><span class="str">&#23398;&#26657;&#25968;&#23383;&#30340;&#21551;&#33945;&#25945;&#23398;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t182" href="#t182">182</a></span><span class="t"><span class="str">&#30005;&#33041;&#21270;&#30340;&#8220;&#36814;&#22836;&#36214;&#19978;&#8221;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t183" href="#t183">183</a></span><span class="t"><span class="str">SEED&#25968;&#23398;&#25945;&#23398;&#26041;&#26696;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t184" href="#t184">184</a></span><span class="t"><span class="str">&#27880;&#24847;&#21147;&#32570;&#20047;&#32508;&#21512;&#30151;&#30340;&#31070;&#35805;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t185" href="#t185">185</a></span><span class="t"><span class="str">12.&#36208;&#20986;&#36864;&#23398;&#30340;&#22256;&#22659;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t186" href="#t186">186</a></span><span class="t"><span class="str">&#22914;&#20309;&#21462;&#24471;&#8220;&#39640;&#36136;&#37327;&#8221;&#30340;&#25945;&#32946;&#65292;&#28040;&#38500;&#21560;&#27602;&#12289;&#24110;&#27966;&#21644;&#26292;&#21147;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t187" href="#t187">187</a></span><span class="t"><span class="str">1.&#36816;&#29992;&#26085;&#26412;&#30340;&#21830;&#19994;&#26041;&#27861;&#26469;&#25913;&#36827;&#23398;&#26657;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t188" href="#t188">188</a></span><span class="t"><span class="str">2.&#20197;&#25972;&#20010;&#19990;&#30028;&#20026;&#35838;&#22530;&#30340;&#25972;&#20307;&#23398;&#20064;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t189" href="#t189">189</a></span><span class="t"><span class="str">3.&#22242;&#20307;&#23398;&#20064;&#21644;&#8220;&#22823;&#22270;&#29255;&#8221;&#25216;&#26408;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t190" href="#t190">190</a></span><span class="t"><span class="str">4.&#36808;&#21521;&#25104;&#21151;&#30340;&#20845;&#21608;&#35838;&#31243;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t191" href="#t191">191</a></span><span class="t"><span class="str">5&#36229;&#32423;&#33829;&#22320;&#24102;&#21160;&#25972;&#20307;&#36827;&#27493;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t192" href="#t192">192</a></span><span class="t"><span class="str">13.&#35268;&#21010;&#26126;&#26085;&#30340;&#23398;&#26657;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t193" href="#t193">193</a></span><span class="t"><span class="str">&#25913;&#21464;&#19968;&#20010;&#22269;&#23478;&#25945;&#32946;&#20307;&#21046;&#30340;12&#20010;&#27493;&#39588;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t194" href="#t194">194</a></span><span class="t"><span class="str">1.&#20316;&#20026;&#32456;&#36523;&#30340;&#12289;&#38271;&#24180;&#30340;&#31038;&#21306;&#36164;&#28304;&#20013;&#24515;&#30340;&#23398;&#26657;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t195" href="#t195">195</a></span><span class="t"><span class="str">2.&#35810;&#38382;&#20320;&#30340;&#39038;&#23458;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t196" href="#t196">196</a></span><span class="t"><span class="str">3.&#20445;&#35777;&#35753;&#39038;&#23458;&#28385;&#24847;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t197" href="#t197">197</a></span><span class="t"><span class="str">4&#36866;&#21512;&#25152;&#26377;&#30340;&#26234;&#21147;&#21697;&#36136;&#21644;&#23398;&#20064;&#31867;&#22411;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t198" href="#t198">198</a></span><span class="t"><span class="str">5.&#36816;&#29992;&#19990;&#30028;&#19978;&#26368;&#22909;&#30340;&#25945;&#23398;&#25216;&#24039;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t199" href="#t199">199</a></span><span class="t"><span class="str">6.&#24320;&#21457;&#20320;&#30340;&#20851;&#38190;&#36164;&#28304;&#65306;&#25945;&#24072;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t200" href="#t200">200</a></span><span class="t"><span class="str">7.&#20351;&#27599;&#19968;&#20010;&#20154;&#26082;&#25104;&#20026;&#19968;&#20010;&#32769;&#24072;&#21448;&#25104;&#20026;&#19968;&#20010;&#23398;&#29983;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t201" href="#t201">201</a></span><span class="t"><span class="str">8.&#35268;&#21010;&#19968;&#20010;&#22235;&#37096;&#20998;&#30340;&#35838;&#31243;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t202" href="#t202">202</a></span><span class="t"><span class="str">9.&#25913;&#21464;&#35780;&#20272;&#20307;&#31995;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t203" href="#t203">203</a></span><span class="t"><span class="str">10.&#36816;&#29992;&#26410;&#26469;&#30340;&#25216;&#26415;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t204" href="#t204">204</a></span><span class="t"><span class="str">11.&#25226;&#25972;&#20010;&#31038;&#21306;&#20316;&#20026;&#19968;&#31181;&#36164;&#28304;&#26469;&#36816;&#29992;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t205" href="#t205">205</a></span><span class="t"><span class="str">12.&#32473;&#20104;&#27599;&#19968;&#20010;&#20154;&#36873;&#25321;&#30340;&#26435;&#21033;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t206" href="#t206">206</a></span><span class="t"><span class="str">14.&#26410;&#26469;&#30340;&#21830;&#19994;&#19990;&#30028;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t207" href="#t207">207</a></span><span class="t"><span class="str">&#8220;&#23398;&#20064;&#22242;&#20307;&#8221;&#30340;&#21830;&#19994;&#33391;&#26426;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t208" href="#t208">208</a></span><span class="t"><span class="str">&#30005;&#23376;&#22810;&#23186;&#20307;&#30340;&#21487;&#33021;&#24615;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t209" href="#t209">209</a></span><span class="t"><span class="str">&#24555;&#36895;&#23398;&#20064;&#30340;&#21830;&#19994;&#33391;&#26426;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t210" href="#t210">210</a></span><span class="t"><span class="str">&#22312;&#20986;&#21806;&#20320;&#30340;&#20135;&#21697;&#30340;&#21516;&#26102;&#20986;&#21806;&#26381;&#21153;&#21644;&#22521;&#35757;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t211" href="#t211">211</a></span><span class="t"><span class="str">&#20316;&#20026;&#19968;&#20010;&#23398;&#20064;&#22242;&#20307;&#30340;&#20844;&#21496;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t212" href="#t212">212</a></span><span class="t"><span class="str">&#20316;&#20026;&#19968;&#31181;&#21830;&#19994;&#32463;&#33829;&#30340;&#23398;&#26657;&#25110;&#23398;&#38498;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t213" href="#t213">213</a></span><span class="t"><span class="str">&#38468;&#24405;&#65306;&#21152;&#36827;&#26032;&#29256;&#26412;&#30340;&#26032;&#36164;&#26009;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t214" href="#t214">214</a></span><span class="t"><span class="str">&#20320;&#30340;&#22269;&#23478;&#24590;&#26679;&#25165;&#33021;&#39046;&#23548;&#36825;&#22330;&#38761;&#21629;&#65311;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t215" href="#t215">215</a></span><span class="t"><span class="str">&#25105;&#20204;&#20010;&#20154;&#21448;&#24212;&#22914;&#20309;&#34892;&#21160;&#65311;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t216" href="#t216">216</a></span><span class="t"><span class="str">&#21508;&#31456;&#27880;&#37322;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t217" href="#t217">217</a></span><span class="t"><span class="str">&#36299;&#65306;&#36229;&#36234;&#23398;&#20064;&#30340;&#38761;&#21629;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t218" href="#t218">218</a></span><span class="t"><span class="str">&#35793;&#21518;&#35760;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t219" href="#t219">219</a></span><span class="t"><span class="str">&#183; &#183; &#183; &#183; &#183; &#183;     (</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t220" href="#t220">220</a></span><span class="t"><span class="str">)"""</span>  <span class="com"># replace with your desired range of characters</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t221" href="#t221">221</a></span><span class="t">    <span class="nam">chinese_chars</span> <span class="op">=</span> <span class="nam">cut_word</span><span class="op">(</span><span class="nam">chinese_chars</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t222" href="#t222">222</a></span><span class="t">    <span class="nam">sentence_length</span> <span class="op">=</span> <span class="nam">random</span><span class="op">.</span><span class="nam">randint</span><span class="op">(</span><span class="num">2</span><span class="op">,</span> <span class="num">5</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t223" href="#t223">223</a></span><span class="t">    <span class="nam">sentence</span> <span class="op">=</span> <span class="str">''</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="nam">random</span><span class="op">.</span><span class="nam">choice</span><span class="op">(</span><span class="nam">chinese_chars</span><span class="op">)</span> <span class="key">for</span> <span class="nam">_</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="nam">sentence_length</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t224" href="#t224">224</a></span><span class="t">    <span class="key">return</span> <span class="nam">sentence</span>&nbsp;</span><span class="r"></span></p>
+</main>
+<footer>
+    <div class="content">
+        <p>
+            <a id="prevFileLink" class="nav" href="d_9ffa8e6b64436dbb_conftest_py.html">&#xab; prev</a> &nbsp; &nbsp;
+            <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
+            <a id="nextFileLink" class="nav" href="d_f7a6e81cea0338db_gen_book_data_py.html">&#xbb; next</a>
+            &nbsp; &nbsp; &nbsp;
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.3.2">coverage.py v7.3.2</a>,
+            created at 2023-11-10 22:51 +0800
+        </p>
+    </div>
+</footer>
+</body>
+</html>

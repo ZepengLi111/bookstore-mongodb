@@ -2,7 +2,6 @@
 /.coverage
 /.idea
 /.pytest_cache
-/htmlcov
 setup.py
 /script
 /venv
