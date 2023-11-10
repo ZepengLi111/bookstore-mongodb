@@ -88,7 +88,7 @@ def get_db_conn(self):  # 返回MongoDB连接
             self.mydb['order'].create_index("order_id")
             self.mydb['store'].create_index("store_id")
             # 复合索引， book_id 正序， belong_store_id 倒序
-            self.mydb['book'].create_index([("book_id", pymongo.ASCENDING), ("belong_store_id", pymongo.DESCENDING)])
+            self.mydb['book'].create_index([("belong_store_id", pymongo.DESCENDING), ("book_id", pymongo.ASCENDING)])
             print('---------->索引命中！')
         except Exception as e:
             print('---------->已存在索引！')
@@ -424,7 +424,7 @@ def get_db_conn(self):  # 返回MongoDB连接
             # 复合索引， book_id 正序， belong_store_id 倒序
             # ...
             # 全文索引
-            self.mydb['book'].create_index({"_t": "text"})
+            self.mydb['book'].create_index([("_t", pymongo.TEXT)])
 ```
 <a name="E0Fv7"></a>
 #### 实现搜索
