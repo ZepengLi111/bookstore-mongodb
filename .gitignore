@@ -9,3 +9,4 @@ setup.py
 app.log
 app.py
 .coverage
+fe/data/book_lx.db

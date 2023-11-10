@@ -105,4 +105,4 @@ class Seller(db_conn.DBConn):
         except BaseException as e:
             return 530, "{}".format(str(e))
 
-
+        return 200, 'ok'
