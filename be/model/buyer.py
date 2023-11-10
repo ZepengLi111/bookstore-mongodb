@@ -252,7 +252,7 @@ class Buyer(db_conn.DBConn):
                 results = list(results)
                 return 200, 'ok', results
         except Exception as e:
-            return 401, "{}".format(str(e)) + ([],)
+            return 401, "{}".format(str(e)), ([],)
 
     def delete_order(self, user_id: str, order_id: str, token: str) -> (int, str):
         try:
@@ -283,9 +283,9 @@ class Buyer(db_conn.DBConn):
                                      {'$inc': {'stock_level': _q}})
             return 200, 'ok'
         except errors.PyMongoError as e:
-            return 528, "{}".format(str(e))
+            return 520, "{}".format(str(e))
         except BaseException as e:
-            return 530, "{}".format(str(e))
+            return 401, "{}".format(str(e))
 
     def delete_order_time(self):
         try:
