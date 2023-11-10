@@ -28,7 +28,7 @@ def error_order_state(state):
     return 523, error_code[523].format(state)
 
 def error_invalid_parameter(a):
-    return 522, error_code[521].format(a)
+    return 522, error_code[522].format(a)
 
 
 def error_account_balance(user_id):

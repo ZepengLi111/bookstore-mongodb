@@ -23,7 +23,7 @@ def main():
 
     cur.execute(sql)
     books_data = cur.fetchall()
-    print(books_data)
+    # print(books_data)
 
     # 连接到 MongoDB 服务器
     client = pymongo.MongoClient("mongodb://127.0.0.1:27017")
